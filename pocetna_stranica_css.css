@@ -2,7 +2,16 @@
     - prvo izgled
     - onda položaj */
 
+
+/* pronasla na netu, nisam stigla isprobati, a mozda bude korisno:
+    crtica označava novi dio, tj. ako nema crticu pripada kodu iznad
+    -@media (prefers-color-scheme: dark) { }
+    -
+
+*/
 :root{
+    /* inicijalizacija nekih varijabla 
+    (vjerovatno će nam trebati kasnije za light/dark mode) */
     --background_color: rgb(74, 17, 114);
     --background_color_h3:rgb(53, 8, 90);
     --font_color:white;
@@ -33,3 +42,21 @@ nav ul{
     flex-direction: row;
     
 }
+@media screen and(max-width:600px){
+    
+}
+/*
+PRIKAZ ZAVISNO OD USLOVA:
+    @media zavisno od uslova mijenja izgled stranice,
+    uslovi mogu biti vezani za ekran, dimenzije, orijentaciju,
+    preference korisnika i sl. između vitičastih zagrada se pise
+    css kod koji se mijenja kada je uslov ispunjen,
+
+    za primjer ovaj kod između zvjezdica prekopirati van komentara
+***************
+@media screen and (max-width:800px) {
+    body{
+        background-color: red;
+    }
+**************
+} */
