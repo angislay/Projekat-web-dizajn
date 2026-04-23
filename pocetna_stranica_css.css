@@ -1,0 +1,28 @@
+:root{
+    --background_color: rgb(74, 17, 114);
+    --background_color_h3:rgb(53, 8, 90);
+    --font_color:white;
+}
+body{
+    background-color: var(--background_color);
+    color: var(--font_color);
+    margin: none;
+}
+.naslov{
+    background-color:var(--background_color_h3);
+    position: fixed;
+    top:0px;
+    width:max-content;
+    text-align: right;
+    margin: none;
+}
+nav{
+    background-color: var(--background_color_h3);
+position: fixed;
+display:flex;
+flex-direction: row;
+}
+ul{
+    display:flex;
+flex-direction: row;
+}
