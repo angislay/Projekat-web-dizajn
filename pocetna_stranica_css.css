@@ -21,20 +21,25 @@ body{
     color: var(--font_color);
     margin: 0;
 }
-.naslov{
-    background-color:var(--background_color_h3);
-    text-align: left;
-    position: fixed;
-    top:0px;
+header{
+    background-color: var(--background_color_h3);
+    position:fixed;
     width:100vw;
-    
-    
+}
+.naslov{/* 
+    background-color:var(--background_color_h3); */
+    text-align: left;
+    top:0px;
 }
 nav{
-    background-color: var(--background_color_h3);
+    background-color: var(--background_color_h3); 
     white-space: nowrap; /* nema prelaska u novi red ako nema prostora */
     display:flex;
     flex-direction: row;
+}
+nav h2{
+    background-color: var(--background_color_h3);
+    width: 100vw;
 }
 nav ul{
     list-style: none; /* brisanje tačkica kod ul */
@@ -42,8 +47,36 @@ nav ul{
     flex-direction: row;
     
 }
-@media screen and(max-width:600px){
+.hamburger{
+    background-color: var(--background_color_h3);
     
+}
+nav button{
+    background-color: var(--background_color_h3);
+    width: min-content;
+    height: min-content;
+    display: none;
+}
+@media screen and (max-width:600px){
+   
+    body{
+        background-color: red;
+    }
+    nav{
+        flex-direction: column;
+        background-color: red;
+    }
+    .padajuci_meni_nav{
+        background-color: var(--background_color_h3);
+        display: flex;
+        width: min-content;
+    }
+    nav ul{
+        flex-direction: column;
+    }
+    nav button{
+        display: flex;
+    }
 }
 /*
 PRIKAZ ZAVISNO OD USLOVA:
