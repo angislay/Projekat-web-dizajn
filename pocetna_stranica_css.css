@@ -27,6 +27,10 @@ header{
     position:fixed;
     width:100vw;
 }
+a{
+    text-decoration: none;
+    color: var(--font_color);
+}
 .naslov{/* 
     background-color:var(--background_color_naslov); */
     text-align: left;
@@ -48,11 +52,11 @@ nav ul{
     background-color: var(--background_color_naslov);
     
 }
-nav button{
+.hamburger_dugme{
     background-color: var(--background_color_naslov);
     border-radius: 5vw;
-    border-color: white;
-    color: white;
+    border-color: var(--font_color);
+    color: var(--font_color);
     width: min-content;
     height: min-content;
     display: none;
@@ -60,31 +64,6 @@ nav button{
 nav button:hover{
     background-color: var(--background_color);
 }
-@media screen and (max-width:600px){
-   
-    body{
-        background-color: red;
-    }
-    nav{
-        flex-direction: column;
-        background-color: red;
-    }
-    .hamburger{
-        background-color: var(--background_color_nav);
-    }
-    .nav_padajuci_meni{
-        background-color: var(--background_color_naslov);
-        display: none;
-        width: min-content;
-    }
-    nav ul{
-        flex-direction: column;
-    }
-    nav button{
-        display: flex;
-    }
-}
-
 /*
 PRIKAZ ZAVISNO OD USLOVA:
     @media zavisno od uslova mijenja izgled stranice,
@@ -100,3 +79,61 @@ PRIKAZ ZAVISNO OD USLOVA:
     }
 **************
 } */
+@media screen and (max-width:600px){
+   
+    body{
+        background-color: red;
+    }
+    nav{
+        flex-direction: column;
+        background-color: red;
+    }
+    .hamburger{
+        background-color: var(--background_color_nav);
+    }
+    
+    .hamburger_dugme{
+        display: flex;
+    }
+    .nav_padajuci_meni{
+        background-color: var(--background_color_naslov);
+        width: min-content;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 500ms ease; /* ease? */
+        /* animation: padajuci_meni_pozadina 500ms; */
+    }
+    /* dodatna clasa open, js dodaje ovu klasu na
+    prvi element preko toggle, omogućava da jedan element 
+    promjenimo na neki nacin bez uvođenje novog elementa u
+    html kod */
+    .nav_padajuci_meni.open{
+        transform: scaleY(1);
+    }
+    nav ul{
+        flex-direction: column;
+    }
+    .nav_padajuci_meni li{
+        opacity: 0;
+        color: var(--font_color);
+        transform: translateX(-10px);
+        transition: all 200ms ease;
+    }
+    .nav_padajuci_meni.open li{
+        opacity: 1;
+        transform: translate(0px);
+    }
+    .nav_padajuci_meni.open li:nth-child(1){transition-delay: 100ms;}
+    .nav_padajuci_meni.open li:nth-child(2){transition-delay: 400ms;}
+    .nav_padajuci_meni.open li:nth-child(3){transition-delay: 900ms;}
+    
+}
+    /* 
+    napravljena animacija koja naglasava kako ce se neki element 
+    mjenjati kad mu se pridruzi animacija preko taga animation */
+@keyframes padajuci_meni_pozadina {/* 
+    transformise objekat tako sto mu mijenja veličinu po y osi
+    vrijednosti predstavljaju razmjeru */
+    from{transform: scaleY(0);}
+    to{transform: scaleY(1);}
+}
