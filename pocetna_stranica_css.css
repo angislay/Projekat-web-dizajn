@@ -12,8 +12,9 @@
 :root{
     /* inicijalizacija nekih varijabla 
     (vjerovatno će nam trebati kasnije za light/dark mode) */
-    --background_color: rgb(74, 17, 114);
-    --background_color_h3:rgb(53, 8, 90);
+    --background_color:rgb(53, 8, 90);
+    --background_color_naslov: rgb(74, 17, 114);
+    --background_color_nav:rgb(35, 9, 84);
     --font_color:white;
 }
 body{
@@ -22,24 +23,20 @@ body{
     margin: 0;
 }
 header{
-    background-color: var(--background_color_h3);
+    background-color: var(--background_color_naslov);
     position:fixed;
     width:100vw;
 }
 .naslov{/* 
-    background-color:var(--background_color_h3); */
+    background-color:var(--background_color_naslov); */
     text-align: left;
     top:0px;
 }
 nav{
-    background-color: var(--background_color_h3); 
+    background-color: var(--background_color_nav); 
     white-space: nowrap; /* nema prelaska u novi red ako nema prostora */
     display:flex;
     flex-direction: row;
-}
-nav h2{
-    background-color: var(--background_color_h3);
-    width: 100vw;
 }
 nav ul{
     list-style: none; /* brisanje tačkica kod ul */
@@ -48,14 +45,20 @@ nav ul{
     
 }
 .hamburger{
-    background-color: var(--background_color_h3);
+    background-color: var(--background_color_naslov);
     
 }
 nav button{
-    background-color: var(--background_color_h3);
+    background-color: var(--background_color_naslov);
+    border-radius: 5vw;
+    border-color: white;
+    color: white;
     width: min-content;
     height: min-content;
     display: none;
+}
+nav button:hover{
+    background-color: var(--background_color);
 }
 @media screen and (max-width:600px){
    
@@ -66,9 +69,12 @@ nav button{
         flex-direction: column;
         background-color: red;
     }
-    .padajuci_meni_nav{
-        background-color: var(--background_color_h3);
-        display: flex;
+    .hamburger{
+        background-color: var(--background_color_nav);
+    }
+    .nav_padajuci_meni{
+        background-color: var(--background_color_naslov);
+        display: none;
         width: min-content;
     }
     nav ul{
@@ -78,6 +84,7 @@ nav button{
         display: flex;
     }
 }
+
 /*
 PRIKAZ ZAVISNO OD USLOVA:
     @media zavisno od uslova mijenja izgled stranice,
