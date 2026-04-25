@@ -70,15 +70,7 @@ PRIKAZ ZAVISNO OD USLOVA:
     uslovi mogu biti vezani za ekran, dimenzije, orijentaciju,
     preference korisnika i sl. između vitičastih zagrada se pise
     css kod koji se mijenja kada je uslov ispunjen,
-
-    za primjer ovaj kod između zvjezdica prekopirati van komentara
-***************
-@media screen and (max-width:800px) {
-    body{
-        background-color: red;
-    }
-**************
-} */
+ */
 @media screen and (max-width:600px){
    
     body{
@@ -98,9 +90,10 @@ PRIKAZ ZAVISNO OD USLOVA:
     .nav_padajuci_meni{
         background-color: var(--background_color_naslov);
         width: min-content;
+        /* tagovi za animaciju */
         transform: scaleY(0);
         transform-origin: top;
-        transition: transform 500ms ease; /* ease? */
+        transition: transform 500ms ease;
         /* animation: padajuci_meni_pozadina 500ms; */
     }
     /* dodatna clasa open, js dodaje ovu klasu na
@@ -108,7 +101,11 @@ PRIKAZ ZAVISNO OD USLOVA:
     promjenimo na neki nacin bez uvođenje novog elementa u
     html kod */
     .nav_padajuci_meni.open{
+        transition: transform 500ms ease;
         transform: scaleY(1);
+    }
+    .resize .nav_padajuci_meni{
+        transition: none;
     }
     nav ul{
         flex-direction: column;
