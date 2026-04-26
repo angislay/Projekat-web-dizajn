@@ -1,0 +1,104 @@
+/* redoslijed stavljanja tagova:
+    - prvo izgled
+    - onda položaj */
+
+
+/* pronasla na netu, nisam stigla isprobati, a mozda bude korisno:
+    crtica označava novi dio, tj. ako nema crticu pripada kodu iznad
+    -@media (prefers-color-scheme: dark) { }
+    -
+
+*/
+:root{
+    --background_color: rgb(53, 8, 90);
+    /* Ista boja za sve što je na vrhu */
+    --top_bar_color: rgb(74, 17, 114); 
+    --font_color: white;
+}
+body{
+    background-color: var(--background_color);
+    color: var(--font_color);
+    margin: 0;
+}
+header{
+    background-color: var(--top_bar_color);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+.naslov h1{
+    padding: 20 px 0;
+    background-color:var(--background_color_naslov); 
+    text-align: center;
+    font-family:SpaceGrotesk-Light;
+    letter-spacing: 1px;
+    top:0px;
+}
+nav{
+    background-color: var(--background_color_nav); 
+    white-space: nowrap; /* nema prelaska u novi red ako nema prostora */
+    display:flex;
+    flex-direction: row;
+}
+nav ul{
+    list-style: none; /* brisanje tačkica kod ul */
+    display: flex;
+    flex-direction: row;
+    
+}
+.hamburger{
+    background-color: var(--background_color_naslov);
+    
+}
+nav button{
+    background-color: var(--background_color_naslov);
+    border-radius: 5vw;
+    border-color: white;
+    color: white;
+    width: min-content;
+    height: min-content;
+    display: none;
+}
+nav button:hover{
+    background-color: var(--background_color);
+}
+@media screen and (max-width:600px){
+   
+    body{
+        background-color: red;
+    }
+    nav{
+        flex-direction: column;
+        background-color: red;
+    }
+    .hamburger{
+        background-color: var(--background_color_nav);
+    }
+    .nav_padajuci_meni{
+        background-color: var(--background_color_naslov);
+        display: none;
+        width: min-content;
+    }
+    nav ul{
+        flex-direction: column;
+    }
+    nav button{
+        display: flex;
+    }
+}
+
+/*
+PRIKAZ ZAVISNO OD USLOVA:
+    @media zavisno od uslova mijenja izgled stranice,
+    uslovi mogu biti vezani za ekran, dimenzije, orijentaciju,
+    preference korisnika i sl. između vitičastih zagrada se pise
+    css kod koji se mijenja kada je uslov ispunjen,
+
+    za primjer ovaj kod između zvjezdica prekopirati van komentara
+***************
+@media screen and (max-width:800px) {
+    body{
+        background-color: red;
+    }
+**************
+} */
