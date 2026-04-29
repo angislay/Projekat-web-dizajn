@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="katalog knjiga.css">
+    
+    <meta charset="UTF-8">
+    <title>Почетна страница</title>
+</head>
+<body>
+          
+       <div class="knjige-sekcija">
+    <header class="drugi-header">
+    <h1>Каталог књига</h1>
+    
+    <div class="pretraga-kontejner">
+        <select id="kriterijum" class="select-kriterijum">
+            <option value="" disabled selected>Критеријум</option>
+            <option value="naslov">Наслов</option>
+            <option value="autor">Аутор</option>
+            <option value="zanr">Жанр</option>
+        </select>
+        
+        <input type="text" id="pretraga" placeholder="Претражи базу">
+        
+        <button class="btn-pretraga">Тражи</button>
+    </div>
+</header>
+
+    <div id="knjige-grid" class="grid-kontejner">
+        </div>
+</div>
+</body>
+</html>

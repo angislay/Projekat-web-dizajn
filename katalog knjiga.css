@@ -1,0 +1,102 @@
+
+:root{
+    /* inicijalizacija nekih varijabla 
+    (vjerovatno će nam trebati kasnije za light/dark mode) */
+    --background_color:rgb(53, 8, 90);
+    --background_color_naslov: rgb(53, 8, 90);
+    --background_color_nav:rgb(35, 9, 84);
+    --font_color:white;
+}
+body{
+    background-color: var(--background_color);
+    color: var(--font_color);
+    margin: 0;
+}
+
+
+.drugi-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 20px;
+    background: var(--background_color);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.drugi-header h1 {
+    margin-bottom: 30px;
+    font-size: 2.8rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+
+.grid-kontejner {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+    padding: 20px;
+}
+
+
+.pretraga-kontejner {
+    display: flex;
+    gap: 10px; /* Razmak između select-a, inputa i dugmeta */
+    width: 100%;
+    max-width: 600px; /* Da ne bi bilo preširoko na velikim ekranima */
+}
+
+.select-kriterijum {
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 2px solid #7b2cbf;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white; /* Tekst u zatvorenom select-u će biti beo */
+    font-size: 1rem;
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+}
+.select-kriterijum option {
+    background-color: var(--background_color);
+    color: white; /* beli tekst za opcijice */
+    padding: 10px;
+}
+.select-kriterijum option:hover {
+    background-color: #9d4edd; /* Svetlija ljubicasta kada bi stavila miss */
+}
+
+#pretraga {
+
+
+    border: 2px solid #7b2cbf; 
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    flex-grow: 1; /*input zauzima sve ostalo*/
+    padding: 12px 15px; 
+    border-radius: 8px; 
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+.select-kriterijum:focus, #pretraga:focus {
+    border-color: #9d4edd; 
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.btn-pretraga {
+   padding: 12px 25px;
+    background-color: #7b2cbf;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-pretraga:hover {
+    background-color: #9d4edd;
+    box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
+}
+#pretraga::placeholder {
+    color: #cbb2fe;
+}
