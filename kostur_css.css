@@ -12,10 +12,17 @@
 :root{
     /* inicijalizacija nekih varijabla 
     (vjerovatno će nam trebati kasnije za light/dark mode) */
+    
     --background_color:rgb(53, 8, 90);
     --background_color_naslov: rgb(74, 17, 114);
     --background_color_nav:rgb(35, 9, 84);
+    --background_color_nav_hover:rgb(51, 7, 134);
+    --background_transparent_black:rgba(255, 255, 255, 0.1);
+    --background_transparent_black_focus:rgba(255,255,255,0.2);
     --font_color:white;
+    --border_color:#7b2cbf;
+    --border_color_hover:#9e5ed6;
+    --box_shadow:rgba(157, 78, 221, 0.5);
 }
 body{
     background-color: var(--background_color);
@@ -34,19 +41,50 @@ a{
 .naslov{/* 
     background-color:var(--background_color_naslov); */
     text-align: left;
-    top:0px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.naslov h2{
+    margin: 0;
 }
 nav{
     background-color: var(--background_color_nav); 
+    height: 30px;
     white-space: nowrap; /* nema prelaska u novi red ako nema prostora */
     display:flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
-nav ul{
+.nav_padajuci_meni{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 60vw;
+    height: 100%;
+
+}
+nav button{
     list-style: none; /* brisanje tačkica kod ul */
     display: flex;
     flex-direction: row;
+    align-items: center;
+    padding: 0;
+    height: 100%;
+    background-color: var(--background_color_nav);
+    border: none;
+    border-radius: 5%;
+    padding: 0 10px;
     
+    &:hover{
+        transition: 300ms;
+        background-color: var(--background_color_nav_hover);
+        border: none;
+    border-radius: 5%;
+    }
 }
 .hamburger{
     background-color: var(--background_color_naslov);
@@ -61,8 +99,13 @@ nav ul{
     height: min-content;
     display: none;
 }
-nav button:hover{
-    background-color: var(--background_color);
+main{
+    justify-self: center;
+    display: flex;
+    padding: 120px;
+    width: 70vw;
+    justify-content: center;
+    flex-direction: column;
 }
 /*
 PRIKAZ ZAVISNO OD USLOVA:

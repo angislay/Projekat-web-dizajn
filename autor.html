@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="kostur_css.css">
-    
+    <link rel="stylesheet" href="autor.css">    
     <meta charset="UTF-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">
      -->
@@ -16,28 +16,63 @@
         </div>
         <nav>
             <div class="hamburger">
-                <button class="hamburger_dugme"">meni</button>
+                <button class="hamburger_dugme"">мени</button>
             </div>
             <div class="nav_padajuci_meni">
-                <ul>
-                    <li><a href="">stranica 1</a></li>
-                    <li><a href="">stranica 2</a></li>
-                    <li><a href="">stranica 3</a></li>
-                </ul> 
+                    <button><a href="">Пријава / Регистрација</a></button>
+                    <button><a href="">Претражи ауторе</a></button>
+                    <button><a href="">Претражи књиге</a></button>
+                    <button><a href="">Мој профил</a></button>
             </div>
         </nav>
     </header>
 
-    <div class="tijelo">
+    <main>
         <div class="osnovni_podaci_autor">
             <section>
                 <aside>
-
+                    <p>
+                        Име: <br>
+                        Презиме: <br>
+                        Датум рођења: <br>
+                        Статус: <br>
+                        Број освојених награда: <br> 
+                        Број продатих примерака: <br>
+  
+                    </p>
                 </aside>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFDfdK-6otjF2yQpkn79i-zoW1H3WsyxHQQQ&s" alt="">
+                <div class="slike">
+                    <button><</button>
+                    <img src="" alt="Нема доступне слике">
+                    <button>></button>
+                </div>
             </section>
         </div>
-    </div>
+        <div>
+            <hr>
+            <h3>
+            Биографија
+            </h3>
+            <hr>
+        </div>
+            <article>
+                <p>
+                Тренутно нема биографије
+                </p>
+            </article>
+            
+            <div class="lista_knjiga">
+                <hr>
+                <h3>
+                    Ауторове књиге
+                </h3>
+                <hr>
+                <section>
+                    Нема књига
+                </section>
+            </div>
+        
+    </main>
 </body>
 <script src="kostur_js.js"></script>
 </html>
