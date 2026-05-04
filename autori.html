@@ -1,21 +1,44 @@
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="autori.css">
-    
+    <link rel="stylesheet" href="kostur_css.css">
+    <link rel="stylesheet" href="autori.css">    
     <meta charset="UTF-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">
      -->
     <!-- pronasla na netu ovo, vezano za poresavanje stranice
      zavisno od sirine prozora, mozda kasnije zatreba -->
-    <title>Autori</title>
+    <title>Аутор</title>
 </head>
 <body>
     <header>
         <div class="naslov">
-        <h1>Добродошли у приказ свих аутора!</h1>
+        <h2>Претрага аутора</h2>
         </div>
-
+        <nav>
+            <div class="hamburger">
+                <button class="hamburger_dugme"">meni</button>
+            </div>
+            <div class="nav_padajuci_meni">
+                    <button><a href="">Пријава / Регистрација</a></button>
+                    <button><a href="">Претражи ауторе</a></button>
+                    <button><a href="">Претражи књиге</a></button>
+                    <button><a href="">Мој профил</a></button>
+            </div>
+        </nav>
     </header>
+
+    <main>
+        <form action="">
+            <select name="" id="">
+                <option value="" disabled selected>Статус аутора</option>
+                <option value="aktivan">Активан</option>
+                <option value="u_penziji">У пензији</option>
+                <option value="preminuo">Преминуо</option>
+            </select>
+            <input type="text">
+            <button>Претражи</button>
+        </form>
+    </main>
 </body>
-<script src="pocetna_stranica_js.js"></script>
+<script src="kostur_js.js"></script>
 </html>
