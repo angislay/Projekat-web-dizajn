@@ -1,0 +1,48 @@
+main{
+    display: flex;
+    height: 80vh;
+    width: 100vw;
+    margin-top: 110px;
+    padding: 0px;
+    flex-direction: row;
+    /* justify-content:stretch; */
+
+}
+aside{
+    width: 20%;
+    padding: 10px;
+    height: 100%;
+    background-color: var(--background_color_naslov);
+}
+.sadrzaj{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.tabovi{
+    height: min-content;
+}
+.tab{
+    background-color: var(--background_color_nav);
+    flex:1;
+    width: 100%;
+    display:none;
+    overflow:auto;
+}
+.tab.aktivan{
+    display: block;
+}
+.tabovi button{
+       padding: 6px 10px;
+    background-color: #7b2cbf;
+    color: var(--font_color);
+    border: none;
+    border-radius: 8px 8px 0px 0px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    &:hover{
+        background-color: var(--border_color_hover);
+    }
+}

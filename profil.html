@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="kostur_css.css">
+    <link rel="stylesheet" href="profil.css">    
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     -->
+    <!-- pronasla na netu ovo, vezano za poresavanje stranice
+     zavisno od sirine prozora, mozda kasnije zatreba -->
+    <title>Мој Профил</title>
+</head>
+<body>
+    <header>
+    <nav class="navbar">
+        <div class="nav-left">
+            <!-- Možeš zadržati dugmad ili ih prebaciti u <ul> listu kao na početnoj -->
+            <button class="login-btn"><a href="">Пријава</a></button>
+            <ul class="nav-links">
+            <li><a href="katalog knjiga.html">Почетна</a></li>
+            <li><a href="#">Аутори</a></li>
+            <li><a href="#">Профил</a></li>
+        </ul>
+        </div>
+        <div class="nav-right">
+            <div class="logo">📚 Књижевни кутак</div>
+        </div>
+    </nav>
+</header>
+
+    <main>
+        <aside>
+            Корисничко име: <br>
+            Лозинка: <br>
+            Име: <br>
+            Презиме: <br>
+            Eмаил: <br>
+            Датум рођења: <br>
+            Адреса: <br>
+        </aside>
+        <div class="sadrzaj">
+            <div class="tabovi">
+                <button onclick="prikaziTab('recenzije')">Рецензије</button>
+                <button onclick="prikaziTab('ocjene')">Оцјене</button>
+            </div>
+            <div class="recenzije tab">aaa</div>
+            <div class="ocjene tab">bbb</div>
+        </div>
+    </main>
+</body>
+<script src="kostur_js.js"></script>
+</html>

@@ -2,6 +2,16 @@ const nav_padajuci_meni=document.querySelector(".nav_padajuci_meni");
 const hamburger_dugme=document.querySelector(".hamburger_dugme");
 let resizeTimer;
 
+function prikaziTab(tab) {
+    document.querySelectorAll('.tab').forEach(el => {
+        el.classList.remove('aktivan');
+    });
+
+    document.querySelector('.' + tab).classList.add('aktivan');
+}
+
+// pocetni tab
+prikaziTab('recenzije');
 window.addEventListener("resize",()=>{
     /* pretvara sve elemente od body u elemente koji imaju
     .resize klasu iznad njih, ovime se sprecava prikazivanje
