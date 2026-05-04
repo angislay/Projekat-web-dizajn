@@ -1,0 +1,136 @@
+/* redoslijed stavljanja tagova:
+    - prvo izgled
+    - onda položaj */
+
+
+/* pronasla na netu, nisam stigla isprobati, a mozda bude korisno:
+    crtica označava novi dio, tj. ako nema crticu pripada kodu iznad
+    -@media (prefers-color-scheme: dark) { }
+    -
+
+*/
+:root{
+    /* inicijalizacija nekih varijabla 
+    (vjerovatno će nam trebati kasnije za light/dark mode) */
+    --background_color:rgb(53, 8, 90);
+    --background_color_naslov: rgb(74, 17, 114);
+    --background_color_nav:rgb(35, 9, 84);
+    --font_color:white;
+}
+body{
+    background-color: var(--background_color);
+    color: var(--font_color);
+    margin: 0;
+}
+header{
+    background-color: var(--background_color_naslov);
+    position:fixed;
+    width:100vw;
+}
+a{
+    text-decoration: none;
+    color: var(--font_color);
+}
+.naslov{/* 
+    background-color:var(--background_color_naslov); */
+    text-align: left;
+    top:0px;
+}
+nav{
+    background-color: var(--background_color_nav); 
+    white-space: nowrap; /* nema prelaska u novi red ako nema prostora */
+    display:flex;
+    flex-direction: row;
+}
+nav ul{
+    list-style: none; /* brisanje tačkica kod ul */
+    display: flex;
+    flex-direction: row;
+    
+}
+.hamburger{
+    background-color: var(--background_color_naslov);
+    
+}
+.hamburger_dugme{
+    background-color: var(--background_color_naslov);
+    border-radius: 5vw;
+    border-color: var(--font_color);
+    color: var(--font_color);
+    width: min-content;
+    height: min-content;
+    display: none;
+}
+nav button:hover{
+    background-color: var(--background_color);
+}
+/*
+PRIKAZ ZAVISNO OD USLOVA:
+    @media zavisno od uslova mijenja izgled stranice,
+    uslovi mogu biti vezani za ekran, dimenzije, orijentaciju,
+    preference korisnika i sl. između vitičastih zagrada se pise
+    css kod koji se mijenja kada je uslov ispunjen,
+ */
+@media screen and (max-width:600px){
+   
+    body{
+        background-color: red;
+    }
+    nav{
+        flex-direction: column;
+        background-color: red;
+    }
+    .hamburger{
+        background-color: var(--background_color_nav);
+    }
+    
+    .hamburger_dugme{
+        display: flex;
+    }
+    .nav_padajuci_meni{
+        background-color: var(--background_color_naslov);
+        width: min-content;
+        /* tagovi za animaciju */
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 500ms ease;
+        /* animation: padajuci_meni_pozadina 500ms; */
+    }
+    /* dodatna clasa open, js dodaje ovu klasu na
+    prvi element preko toggle, omogućava da jedan element 
+    promjenimo na neki nacin bez uvođenje novog elementa u
+    html kod */
+    .nav_padajuci_meni.open{
+        transition: transform 500ms ease;
+        transform: scaleY(1);
+    }
+    .resize .nav_padajuci_meni{
+        transition: none;
+    }
+    nav ul{
+        flex-direction: column;
+    }
+    .nav_padajuci_meni li{
+        opacity: 0;
+        color: var(--font_color);
+        transform: translateX(-10px);
+        transition: all 200ms ease;
+    }
+    .nav_padajuci_meni.open li{
+        opacity: 1;
+        transform: translate(0px);
+    }
+    .nav_padajuci_meni.open li:nth-child(1){transition-delay: 100ms;}
+    .nav_padajuci_meni.open li:nth-child(2){transition-delay: 400ms;}
+    .nav_padajuci_meni.open li:nth-child(3){transition-delay: 900ms;}
+    
+}
+    /* 
+    napravljena animacija koja naglasava kako ce se neki element 
+    mjenjati kad mu se pridruzi animacija preko taga animation */
+@keyframes padajuci_meni_pozadina {/* 
+    transformise objekat tako sto mu mijenja veličinu po y osi
+    vrijednosti predstavljaju razmjeru */
+    from{transform: scaleY(0);}
+    to{transform: scaleY(1);}
+}
