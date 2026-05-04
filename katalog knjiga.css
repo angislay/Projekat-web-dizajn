@@ -100,3 +100,64 @@ body{
 #pretraga::placeholder {
     color: #cbb2fe;
 }
+
+
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: var(--background_color_nav);
+   
+    position: fixed;   /* Fiksira navigaciju */
+    top: 0;            /* Lepe je za sam vrh */
+    left: 0;           /* Širi je od leve ivice */
+    width: 100%;       /* Razvlači je preko celog ekrana */
+    z-index: 1000;     /* Osigurava da navigacija bude IZNAD ostalog sadržaja */
+    box-sizing: border-box; /* Da padding ne "izgura" navbar van ekrana */
+}
+
+
+
+.nav-links {
+    list-style: none;
+    .knjiga-kartica img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+
+.logo {
+    margin-left: auto;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+a {
+    text-decoration: none;
+    color: var(--font_color);
+}
+nav a:hover {
+    color: #cbb2fe;
+}
+.knjiga-kartica {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.knjiga-kartica img {
+    width: 100%;
+    height: 250px;
+    object-fit: contain; 
+    border-radius: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+.knjiga-kartica:hover {
+    transform: scale(1.03);
+}
