@@ -1,3 +1,12 @@
+main{
+    overflow: auto;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content:start;
+    align-items: center;
+    padding: 100px;
+}
 form{
     width: 60%;
     display: flex;
@@ -52,4 +61,22 @@ form button{
         background-color: var(--border_color_hover);
         box-shadow: 0 0 15px var(--box_shadow);
     }
+}
+section{
+    background-color: var(--background_color_nav);
+    padding: 10px;
+    margin-top: 20px;
+    height: 100%;
+    width: 70%;
+    border-radius: 10px;
+}
+.ocjena{
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0px;
+    justify-content: space-between;
+    border-bottom: solid 1px white;
+}
+.popunjena_zvijezda{
+    color: orange;
 }

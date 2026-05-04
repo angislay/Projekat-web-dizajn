@@ -46,3 +46,13 @@ aside{
         background-color: var(--border_color_hover);
     }
 }
+.ocjena{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 0px;
+}
+.popunjena_zvijezda{
+    color: orange;
+}
