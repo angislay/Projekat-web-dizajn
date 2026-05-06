@@ -12,20 +12,27 @@
 </head>
 <body>
     <header>
-    <nav class="navbar">
-        <div class="nav-left">
-            <!-- Možeš zadržati dugmad ili ih prebaciti u <ul> listu kao na početnoj -->
-            <button class="login-btn"><a href="">Пријава</a></button>
-            <ul class="nav-links">
-             <li><a href="katalog knjiga.html">Почетна</a></li>
-            <li><a href="autori.html">Аутори</a></li>
-            <li><a href="profil.html">Профил</a></li>
-        </ul>
-        </div>
-        <div class="nav-right">
-            <div class="logo">📚 Књижевни кутак</div>
-        </div>
-    </nav>
+       <nav class="navbar">
+
+    <div class="nav-left">
+        <button class="login-btn">Пријава</button>
+         <ul class="nav-links">
+        <li><a href="katalog knjiga.html">Почетна</a></li>
+        <li><a href="autori.html">Аутори</a></li>
+        <li><a href="profil.html">Профил</a></li>
+        <li><a href="admin knjige.html">Админ књиге</a></li>
+        <li><a href="admin_autori.html">Админ аутора</a></li>
+    </ul>
+    </div>
+
+   
+
+    <div class="nav-right">
+        <button class="hamburger_dugme">☰</button>
+        <div class="logo">📚 Књижевни кутак</div>
+    </div>
+
+</nav>
 </header>
 
     <main>
@@ -38,12 +45,29 @@
             Датум рођења: <br>
             Адреса: <br>
         </aside>
+  
         <div class="sadrzaj">
             <div class="tabovi">
                 <button onclick="prikaziTab('recenzije')">Рецензије</button>
                 <button onclick="prikaziTab('ocjene')">Оцјене</button>
             </div>
-            <div class="recenzije tab">aaa</div>
+            <div class="recenzije tab">
+    <div class="recenzija">
+        <h3><a href="knjiga_na_drinici_cuprija.html">На Дрини ћуприја</a></h3>
+        <p>
+            Одлична књига која приказује историју и живот људи на овим просторима.
+            Стил писања је веома богат и описан.
+        </p>
+    </div>
+
+    <div class="recenzija">
+        <h3><a href="knjiga_prokleta_avlija.html">Проклета авлија</a></h3>
+        <p>
+            Кратка али снажна прича. Атмосфера је мрачна и напета,
+            а ликови су веома упечатљиви.
+        </p>
+    </div>
+</div>
             <div class="ocjene tab">
                 <div class="ocjena">
                     <a href="autor.html">Иво Андрић</a>
