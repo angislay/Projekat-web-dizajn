@@ -1,0 +1,86 @@
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="kostur_css.css">
+    <link rel="stylesheet" href="admin_autori.css">    
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     -->
+    <!-- pronasla na netu ovo, vezano za poresavanje stranice
+     zavisno od sirine prozora, mozda kasnije zatreba -->
+    <title>Аутор</title>
+</head>
+<body>
+    <header>
+    <nav class="navbar">
+        <div class="nav-left">
+            <!-- Možeš zadržati dugmad ili ih prebaciti u <ul> listu kao na početnoj -->
+            <button class="login-btn"><a href="">Пријава</a></button>
+            <ul class="nav-links">
+             <li><a href="katalog knjiga.html">Почетна</a></li>
+            <li><a href="autori.html">Аутори</a></li>
+            <li><a href="profil.html">Профил</a></li>
+        </ul>
+        </div>
+        <div class="nav-right">
+            <div class="logo">📚 Књижевни кутак</div>
+        </div>
+    </nav>
+</header>
+
+    <main>
+        <h3>Листа Аутора:</h3>
+        <section>
+            <div class="element">
+                <a href="autor.html"><strong>Иво Андрић</strong></a>
+                <!-- <div class="zvijezde">
+                    <label for="">Просјечна оцјена корисника: </label>
+                    <span class="fa fa-star popunjena_zvijezda"></span> 
+                    <span class="fa fa-star popunjena_zvijezda"></span> 
+                    <span class="fa fa-star popunjena_zvijezda"></span> 
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                </div> -->
+                <div class="dugmad">
+                    <button onclick="popUp()">Измени</button>
+                    <button>Обриши</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div class="izmjena">
+        <form action="">
+            <h3>Измена података:</h3>
+            <div class="unos">
+                <label for="">Име:</label>
+                <input type="text" placeholder="Иво">
+            </div>
+            <div class="unos">
+                <label for="">Презиме:</label>
+                <input type="text" placeholder="Андрић">
+            </div>
+            <div class="unos">
+                <label for="">Статус:</label>
+                <input type="text" placeholder="Преминуо">
+            </div>
+            <div class="unos">
+                <label for="">Датум рођења:</label>
+                <input type="date" placeholder="">
+            </div>
+            <div class="unos">
+                <label for="">Број освојених награда:</label>
+                <input type="number" placeholder="">
+            </div>
+            <div class="unos">
+                <label for="">Број продатих примерака:</label>
+                <input type="number" placeholder="">
+            </div>
+            <div class="unos">
+                <button onclick="popUp()">Сачувај</button>
+                <button onclick="popUp()">Одустани</button>
+            </div>
+        </form>
+    </div>
+</body>
+<script src="kostur_js.js"></script>
+</html>
