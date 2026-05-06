@@ -76,7 +76,17 @@ form input{
 form button{
     padding: 10px;
     font-size: medium;
+    
 }
 input[type="number"]{
     width: 80px;
+}
+button:hover{
+    
+    background-color: var(--background_transparent_black_focus);
+    transition: 300ms;
+}
+#brisanje:hover{
+    background-color: red;
+    transition: 300ms;
 }

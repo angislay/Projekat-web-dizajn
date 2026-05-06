@@ -11,7 +11,7 @@ function prikaziTab(tab) {
 }
 function popUp(){
     let pop_up_prozor= document.querySelector('.izmjena');
-    if(pop_up_prozor.style.display==='none' || pop_up_prozor.style.display===''){
+    if(pop_up_prozor.style.opacity==='none' || pop_up_prozor.style.display===''){
         pop_up_prozor.style.display='flex';
     }
     else{
