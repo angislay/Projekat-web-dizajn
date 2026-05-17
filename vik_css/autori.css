@@ -1,0 +1,18 @@
+main{
+
+}
+form{
+    flex-direction: row;
+}
+.ocjena{
+    flex-direction: row;
+}
+button{
+        color: var(--font_color);
+        background-color: var(--border_color);
+        border-radius: 5px;
+        &:hover{
+            transition: 300ms;
+            background-color: var(--border_color_hover);
+        }        
+}

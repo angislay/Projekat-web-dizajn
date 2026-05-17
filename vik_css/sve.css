@@ -1,0 +1,89 @@
+:root{
+    
+    --background_color:rgb(53, 8, 90);
+    --background_color_naslov: rgb(74, 17, 114);
+    --background_color_nav:rgb(35, 9, 84);
+    --background_color_nav_hover:rgb(51, 7, 134);
+    --background_transparent_black:rgba(255, 255, 255, 0.1);
+    --background_transparent_black_focus:rgba(255,255,255,0.2);
+    --font_color:white;
+    --border_color:#7b2cbf;
+    --border_color_hover:#9e5ed6;
+    --box_shadow:rgba(157, 78, 221, 0.5);
+}
+*{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    border:solid red 1px;
+}
+html,body {
+    display: block;
+    position: absolute;
+    top: 0%;
+    width: 100%;
+  /* height: 100%; */
+    margin: 0;
+    justify-content: start;
+    gap: 0px;
+}
+body{
+    background-color: var(--background_color);
+    color: var(--font_color);
+    
+}
+ul{
+    list-style-type: none;
+}
+nav{
+    position: fixed;
+    background-color: var(--background_color_nav);
+    width: 100%;
+    min-height: clamp(60px, 8vh, 80px);
+    top:0%;
+    left: 0%;
+    flex-direction: row;
+    justify-content: space-between;
+    transition: 300ms;
+    & button{
+        color: var(--font_color);
+        background-color: var(--border_color);
+        border-radius: 5px;
+        &:hover{
+            transition: 300ms;
+            background-color: var(--border_color_hover);
+        }        
+    }
+    & a:hover{
+        transition: 300ms;
+        background-color: var(--background_color_nav_hover);
+    }
+}
+.padajuci_meni{
+    display: flex;
+    flex-direction: row;
+    & > ul{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+    }
+}
+a{
+    color: var(--font_color);
+    text-decoration: none;
+    border-radius: 5px;
+}
+main{
+    margin: auto;
+    margin-top:clamp(60px, 8vh, 80px);
+    width:70%;
+}
+#hamburger_dugme{
+    display: none;
+}
+.zvijezde{
+    flex-direction: row;
+}

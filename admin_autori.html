@@ -1,8 +1,10 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="kostur_css.css">
-    <link rel="stylesheet" href="admin_autori.css">    
+    <!-- <link rel="stylesheet" href="kostur_css.css">
+    <link rel="stylesheet" href="admin_autori.css"> -->
+    <link rel="stylesheet" href="vik_css/sve.css">
+    <link rel="stylesheet" href="vik_css/admin_autori.css">    
     <meta charset="UTF-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">
      -->
@@ -12,29 +14,25 @@
 </head>
 <body>
     <header>
-   <nav class="navbar">
-
-    <div class="nav-left">
-        <button class="login-btn">Пријава</button>
-         <ul class="nav-links">
-        <li><a href="katalog knjiga.html">Почетна</a></li>
-        <li><a href="autori.html">Аутори</a></li>
-        <li><a href="profil.html">Профил</a></li>
-        <li><a href="admin knjige.html">Админ књиге</a></li>
-        <li><a href="admin_autori.html">Админ аутора</a></li>
-    </ul>
-    </div>
-
-   
-
-    <div class="nav-right">
-        <button class="hamburger_dugme">☰</button>
-        <div class="logo">📚 Књижевни кутак</div>
-    </div>
-
-</nav>
-</header>
-
+        <nav>
+            <div class="levo">
+                    <div class="hamburger">
+                    <button id="hamburger_dugme">meni</button>
+                </div>
+                <div class="padajuci_meni">
+                    <button>Пријава</button>
+                    <ul>
+                        <li><a href="katalog knjiga.html">Почетна</a></li>
+                        <li><a href="autori.html">Аутори</a></li>
+                        <li><a href="profil.html">Профил</a></li>
+                        <li><a href="admin knjige.html">Админ књиге</a></li>
+                        <li><a href="admin_autori.html">Админ аутора</a></li>
+                    </ul> 
+                </div>
+            </div>    
+            <div class="desno"></div> 
+        </nav>
+    </header>
     <main>
         <h3>Листа Аутора:</h3>
         <section>
@@ -82,6 +80,7 @@
                 <label for="">Број продатих примерака:</label>
                 <input type="number" placeholder="">
             </div>
+            
             <div class="unos">
                 <button onclick="popUp()">Сачувај</button>
                 <button onclick="popUp()">Одустани</button>

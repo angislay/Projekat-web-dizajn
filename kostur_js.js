@@ -1,7 +1,27 @@
 const nav_padajuci_meni=document.querySelector(".nav_padajuci_meni");
 const hamburger_dugme=document.querySelector(".hamburger_dugme");
 let resizeTimer;
+let autori=[];
+let knjige=[];
+let korisnici=[];
+let ocjene=[];
+let recenzije=[];
+async function preuzimanjePodatakaBaza() {
+    try{
+        const odg = await fetch('./data2026.json');
+        const podaci=await odg.json();
 
+        autori=podaci.autori || [];//niz autora ili prazan niz
+        knjige=podaci.knjige || [];//jer ako u data.json ne postoji ovaj niz
+        korisnici=podaci.korisnici || [];//dobice vrijednost undefined
+        recenzije=podaci.recenzije || [];//to poslije pravi probleme u kodu
+        ocjene=podaci.ocjene || [];//gdje se očekuje niz, a ne jedna vrijednost
+    }catch(error){
+        console.error("Problem sa povezivanjem sa bazom");
+    }
+}
+//poziva preuzimanje podataka kad se pređe sa stranice na stranicu?
+document.addEventListener('DOMContentLoaded',preuzimanjePodatakaBaza());
 function prikaziTab(tab) {
     document.querySelectorAll('.tab').forEach(el => {
         el.classList.remove('aktivan');

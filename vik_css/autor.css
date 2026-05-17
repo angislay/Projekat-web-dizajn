@@ -1,0 +1,17 @@
+main{
+
+}
+section{
+    flex-direction: row;
+}
+aside{
+    flex: 1;
+}
+figure{
+    flex: 1;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+img{
+    width: 80%;
+}
