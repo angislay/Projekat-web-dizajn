@@ -6,6 +6,8 @@ form{
 }
 .ocjena{
     flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
 }
 button{
         color: var(--font_color);
@@ -15,4 +17,10 @@ button{
             transition: 300ms;
             background-color: var(--border_color_hover);
         }        
+}
+section{
+    height: 70vh;
+    overflow-y: auto;
+    flex-wrap: nowrap;
+    
 }

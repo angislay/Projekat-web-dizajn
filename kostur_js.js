@@ -21,7 +21,7 @@ async function preuzimanjePodatakaBaza() {
     }
 }
 //poziva preuzimanje podataka kad se pređe sa stranice na stranicu?
-document.addEventListener('DOMContentLoaded',preuzimanjePodatakaBaza());
+document.addEventListener('DOMContentLoaded',preuzimanjePodatakaBaza);
 function prikaziTab(tab) {
     document.querySelectorAll('.tab').forEach(el => {
         el.classList.remove('aktivan');
