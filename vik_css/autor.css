@@ -2,16 +2,125 @@ main{
 
 }
 section{
+    padding: 5% 0;
+    width: 100%;
     flex-direction: row;
+    min-height: 20vh;
 }
 aside{
     flex: 1;
+    border: solid 2px var(--border_color);
+    border-radius: 5%;
+    background-color: var(--background_color_nav);
+    padding: 2%;
+}
+strong{
+    align-items: start;
+    padding-left: 10px;
 }
 figure{
+    margin: 0;
     flex: 1;
     flex-direction: row;
     flex-wrap: nowrap;
-}
+    height: 100%;
+    & img{
+        object-fit: contain;
+        height: 35vmin;
+        width: 100%;  
+    }
+    & button{
+        border-radius: 100%;
+        background-color: var(--border_color);
+        color: var(--font_color);
+        margin: 2%;
+        padding: 2%;
+        width: 5vmin;
+        height: 5vmin;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.3s;
+        &:hover{
+            background-color: var(--border_color_hover);
+            box-shadow: 0 0 1% var(--box_shadow);
+    }
+}}
 img{
     width: 80%;
+}
+p{
+    margin: 1%;
+}
+h3{
+    display: block;
+}
+hr{
+   display: block;
+    width: 100%;
+    height: 1px;
+    min-height: 1px;
+    border: none;
+    background-color: var(--border_color_hover);
+}
+.naslov{
+    width: 100%;
+}
+.ocjena{
+    margin-top: 2%;
+}
+@media screen and (max-width:600px){
+    section{
+        flex-direction: column;
+    }
+    figure{
+        margin-top: 2vh;
+    }
+    #hamburger_dugme{
+        display: inline;
+    }
+    .hamburger{
+    position:relative;
+    display: inline-flex;
+    }
+    .padajuci_meni{
+        border: solid 1px var(--border_color);
+        border-radius: 10px;
+        background-color: var(--background_color_nav);
+        position: absolute;
+        left: 0;
+        top:100%;
+        width:min-content;
+        /* width: 100%; */
+        transform: scaleY(0);
+        transform-origin: top;
+        transition:transform 300ms ease;
+        &>ul{
+            flex-direction: column;
+            flex-wrap: nowrap;
+            padding: 0 2vw;
+        }  
+    }
+    .padajuci_meni.open{
+        height: auto;
+           transform: scaleY(1);
+    }
+    
+    .padajuci_meni li{
+        opacity: 0;
+        color: var(--font_color);
+        transform: translateX(-10px);
+        transition: all 200ms ease;
+        transition: 0.5s;
+        transition-delay: calc(var(--i) * 100ms);
+    }
+    .padajuci_meni.open li{
+        opacity: 1;
+        transform: translate(0px);
+        
+    }
+    
+    .resize .padajuci_meni{
+        transition: none;
+    }
 }

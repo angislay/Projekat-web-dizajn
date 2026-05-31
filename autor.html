@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="vik_css/sve.css">
     <link rel="stylesheet" href="vik_css/autor.css">    
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">
      -->
     <!-- pronasla na netu ovo, vezano za poresavanje stranice
@@ -17,11 +18,12 @@
     <header>
         <nav>
             <div class="levo">
+                
+                <button>Пријава</button>
                     <div class="hamburger">
-                    <button id="hamburger_dugme">meni</button>
-                </div>
+                    <button id="hamburger_dugme" onclick="padajuci_meni()">meni</button>
+                
                 <div class="padajuci_meni">
-                    <button>Пријава</button>
                     <ul>
                         <li><a href="katalog knjiga.html">Почетна</a></li>
                         <li><a href="autori.html">Аутори</a></li>
@@ -29,6 +31,7 @@
                         <li><a href="admin knjige.html">Админ књиге</a></li>
                         <li><a href="admin_autori.html">Админ аутора</a></li>
                     </ul> 
+                </div>
                 </div>
             </div>    
             <div class="desno"></div> 
@@ -61,13 +64,13 @@
                 </div>
             </aside>
             <figure id="slika">
-                <button id="minus"><</button>
+                <button onclick="console.log('clicked')">&lt;</button>
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxx2ywtmPARuvgh2MTolvbQ25sOj8fOvt5lRYfZpP50t5wD4mLqjzw7C8URY5zbzhd-mtNN_41C6lMvvmvfec6z4h55su66v9LZ2q-GA&s=10" alt="Нема доступне слике">
-                <button id="plus">></button>
+                <button onclick="plus()">&gt;</button>
             </figure>
         </section>
     
-        <div>
+        <div class="naslov">
             <hr>
             <h3>
             Биографија
@@ -83,13 +86,13 @@
                 </p>
             </article>
             
-            <div id="lista_knjiga">
+            <div class="naslov">
                 <hr>
                 <h3>
-                    Ауторове књиге
+                    Ауторове књиге:
                 </h3>
                 <hr>
-                <section>
+                <section id="lista">
                     <a href="knjiga detaljno.html">
                     Ex Ponto, стихови у прози, 1918. <br> 
 Немири, стихови у прози, 1920. <br>
@@ -115,4 +118,5 @@
     </main>
 </body>
 <script src="vik_js/autor.js"></script>
+<script src="vik_js/sve.js"></script>
 </html>

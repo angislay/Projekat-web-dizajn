@@ -17,7 +17,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    border:solid red 1px;
+    /* border:solid red 1px; */
 }
 html,body {
     display: block;
@@ -86,4 +86,63 @@ main{
 }
 .zvijezde{
     flex-direction: row;
+}
+.levo{
+    flex-direction: row;
+    position: relative;
+}
+@media screen and (max-width:600px){
+    /* section{
+        flex-direction: column;
+    }
+    figure{
+        margin-top: 2vh;
+    } */
+    #hamburger_dugme{
+        display: inline;
+    }
+    .hamburger{
+    position:relative;
+    display: inline-flex;
+    }
+    .padajuci_meni{
+        border: solid 1px var(--border_color);
+        border-radius: 10px;
+        background-color: var(--background_color_nav);
+        position: absolute;
+        left: 0;
+        top:100%;
+        width:min-content;
+        /* width: 100%; */
+        transform: scaleY(0);
+        transform-origin: top;
+        transition:transform 300ms ease;
+        &>ul{
+            flex-direction: column;
+            flex-wrap: nowrap;
+            padding: 0 2vw;
+        }  
+    }
+    .padajuci_meni.open{
+        height: auto;
+           transform: scaleY(1);
+    }
+    
+    .padajuci_meni li{
+        opacity: 0;
+        color: var(--font_color);
+        transform: translateX(-10px);
+        transition: all 200ms ease;
+        transition: 0.5s;
+        transition-delay: calc(var(--i) * 100ms);
+    }
+    .padajuci_meni.open li{
+        opacity: 1;
+        transform: translate(0px);
+        
+    }
+    
+    .resize .padajuci_meni{
+        transition: none;
+    }
 }
