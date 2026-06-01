@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="vik_css/sve.css">
     <link rel="stylesheet" href="vik_css/admin_autori.css">    
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">
      -->
     <!-- pronasla na netu ovo, vezano za poresavanje stranice
@@ -16,11 +17,12 @@
     <header>
         <nav>
             <div class="levo">
+                
+                <button>Пријава</button>
                     <div class="hamburger">
-                    <button id="hamburger_dugme">meni</button>
-                </div>
+                    <button id="hamburger_dugme" onclick="padajuci_meni()">meni</button>
+                
                 <div class="padajuci_meni">
-                    <button>Пријава</button>
                     <ul>
                         <li><a href="katalog knjiga.html">Почетна</a></li>
                         <li><a href="autori.html">Аутори</a></li>
@@ -29,13 +31,15 @@
                         <li><a href="admin_autori.html">Админ аутора</a></li>
                     </ul> 
                 </div>
+                </div>
             </div>    
             <div class="desno"></div> 
         </nav>
     </header>
+
     <main>
         <h3>Листа Аутора:</h3>
-        <section>
+        <section id="lista">
             <div class="element">
                 <a href="autor.html"><strong>Иво Андрић</strong></a>
                 <!-- <div class="zvijezde">
@@ -47,7 +51,7 @@
                     <span class="fa fa-star"></span>
                 </div> -->
                 <div class="dugmad">
-                    <button onclick="popUp()">Измени</button>
+                    <button onclick="pop_up()">Измени</button>
                     <button id="brisanje">Обриши</button>
                 </div>
             </div>
@@ -56,37 +60,51 @@
     <div class="izmjena">
         <form action="">
             <h3>Измена података:</h3>
-            <div class="unos">
-                <label for="">Име:</label>
-                <input type="text" placeholder="Иво">
-            </div>
-            <div class="unos">
-                <label for="">Презиме:</label>
-                <input type="text" placeholder="Андрић">
-            </div>
-            <div class="unos">
-                <label for="">Статус:</label>
-                <input type="text" placeholder="Преминуо">
-            </div>
-            <div class="unos">
-                <label for="">Датум рођења:</label>
-                <input type="date" placeholder="">
-            </div>
-            <div class="unos">
-                <label for="">Број освојених награда:</label>
-                <input type="number" placeholder="">
-            </div>
-            <div class="unos">
-                <label for="">Број продатих примерака:</label>
-                <input type="number" placeholder="">
-            </div>
-            
-            <div class="unos">
-                <button onclick="popUp()">Сачувај</button>
-                <button onclick="popUp()">Одустани</button>
+            <div class="kontejner">
+                <div class="unos">
+                    <label for="">Име:</label>
+                    <input type="text" id="unos_ime" placeholder="Иво">
+                </div>
+                <div class="unos">
+                    <label for="">Презиме:</label>
+                    <input type="text" id="unos_prezime" placeholder="Андрић">
+                </div>
+                <div class="unos">
+                    <label for="">Статус:</label>
+                    <input type="text" id="unos_status" placeholder="Преминуо">
+                </div>
+                <div class="unos">
+                    <label for="">Датум рођења:</label>
+                    <input type="date" id="unos_datum" placeholder="">
+                </div>
+                <div class="unos">
+                    <label for="">Број освојених награда:</label>
+                    <input type="number" id="unos_nagrade" placeholder="">
+                </div>
+                <div class="unos">
+                    <label for="">Број продатих примерака:</label>
+                    <input type="number" id="unos_primjerci" placeholder="">
+                </div>
+                <div class="unos">
+                    <label for="">Контакт:</label>
+                    <input type="text" id="unos_kontakt" placeholder="987978">
+                </div>
+                <div class="unos">
+                    <label>Биографија:</label>
+                    <textarea id="unos_bio" rows="3" placeholder="Учитавање"></textarea>
+                </div>
+                <div class="unos">
+                    <label>Листе URL-ова слика (одвојити зарезом , ):</label>
+                    <textarea id="unos_slike" rows="3" placeholder="https://example.com/slika1.jpg&#10;https://example.com/slika2.jpg"></textarea>
+                </div>
+                <div class="unos">
+                    <button onclick="pop_up()">Сачувај</button>
+                    <button onclick="pop_up()">Одустани</button>
+                </div>
             </div>
         </form>
     </div>
 </body>
-<script src="kostur_js.js"></script>
+<script src="vik_js/sve.js"></script>
+<script src="vik_js/admin_autori.js"></script>
 </html>

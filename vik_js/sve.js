@@ -1,6 +1,5 @@
 let resizeTimer;
 
-document.addEventListener("DOMContentLoaded",preuzmi_autora);
 function padajuci_meni(){
     const padajuci_meni=document.querySelector(".padajuci_meni");
     padajuci_meni.classList.toggle("open");

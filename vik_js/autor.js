@@ -72,3 +72,5 @@ function plus(){
     console.log("dodat, br slike"+br_slike);
     ucitaj_sliku();
 }
+
+document.addEventListener("DOMContentLoaded",preuzmi_autora);

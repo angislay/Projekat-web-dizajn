@@ -2,19 +2,123 @@ section{
     background-color: var(--background_color_nav);
     border-radius: 5vmin;
     width: 70%;
+    height: 70vh;
     padding: 1%;
+    overflow-y: auto;
+    flex-wrap: nowrap;
 }
 .element{
     flex-direction: row;
     width: 100%;
     border-bottom: solid var(--font_color) 1px;
+    justify-content: space-between;
+    padding: 0.2rem;
     &:last-child{
         border-bottom: none;
     }
 }
 .izmjena{
     display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0,0,0,0.5);
+    top: 0%;
+    z-index: 9999;
+    transition: 300ms;
+}
+.izmjena form{
+    background-color: var(--background_color_naslov);
+    width: 80vw;
+    height: 70vh;
+    margin: 5rem auto;
+    border-radius: 20px;
+    transition: 300ms;
+    
+}
+.kontejner{
+    width: 80%;
+    height: 70%;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    overflow-y:auto ;
 }
 .dugmad{
     flex-direction: row;
+    padding: 0.1rem;
+}
+.izmjena.open{
+    display: inline;
+}
+form h3{
+    width: 80%;/* 
+    margin: 0px 20px;
+    margin-bottom: 10px; */
+    margin: 0;
+    padding: 1rem 2rem;
+    border-bottom: solid var(--font_color) 2px;
+}
+.unos{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 30%;
+    font-size: large;
+    margin: 1rem 2rem;
+}
+form input{
+    background-color: var(--background_color_nav);
+    color: var(--font_color);
+    height: 2rem;
+    width: 10rem;
+    border-radius: 5px;
+}
+form button{
+    padding: 10px;
+    font-size: medium;
+    background-color: var(--background_color_naslov);
+    border: solid 1px var(--font_color);
+    color: var(--font_color);
+    border-radius: 1rem;
+    margin: 0.1rem;
+    cursor: pointer;
+}
+form textarea{
+    background-color: var(--background_color_nav);
+    color: var(--font_color);
+    width: 100%;
+}
+input[type="number"]{
+    width: 80px;
+}
+button{
+    color: var(--font_color);
+    background-color: var(--background_color_nav);
+    border: solid 1px var(--font_color);
+    border-radius: 1rem;
+}
+button:hover{
+    
+    background-color: var(--background_transparent_black_focus);
+    transition: 300ms;
+}
+#brisanje:hover{
+    background-color: red;
+    transition: 300ms;
+}
+@media screen and (max-width:600px){
+    .kontejner{
+        flex-direction: column;
+       flex-wrap: nowrap;
+       overflow-y:auto;
+    }
+    .unos{
+        width: 100%;
+        margin: 0.5rem 0;
+        flex-direction: column;
+    }
 }

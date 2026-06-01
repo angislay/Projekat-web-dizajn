@@ -10,11 +10,12 @@ section{
 aside{
     flex: 1;
     border: solid 2px var(--border_color);
-    border-radius: 5%;
+    border-radius: 2rem;
     background-color: var(--background_color_nav);
     padding: 2%;
 }
 strong{
+    width: 90%;
     align-items: start;
     padding-left: 10px;
 }
@@ -27,16 +28,18 @@ figure{
     & img{
         object-fit: contain;
         height: 35vmin;
-        width: 100%;  
+        width: auto;
+        max-width: 55%;  
     }
     & button{
         border-radius: 100%;
         background-color: var(--border_color);
         color: var(--font_color);
-        margin: 2%;
-        padding: 2%;
-        width: 5vmin;
-        height: 5vmin;
+        flex-shrink: 0;
+        margin: 0.5rem;
+        padding: 0.5rem;
+        width: 2.5rem;
+        height: 2.5rem;
         border: none;
         cursor: pointer;
         font-weight: bold;
@@ -46,9 +49,9 @@ figure{
             box-shadow: 0 0 1% var(--box_shadow);
     }
 }}
-img{
+/* img{
     width: 80%;
-}
+} */
 p{
     margin: 1%;
 }
@@ -75,6 +78,8 @@ hr{
     }
     figure{
         margin-top: 2vh;
+        justify-content: space-between;
+        width: 100%;
     }
     #hamburger_dugme{
         display: inline;
