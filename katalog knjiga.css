@@ -106,10 +106,84 @@ body{
 
 
 
+/* KARTICE KNJIGA */
+.knjiga-kartica {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.05); /* Blaga prozirna pozadina */
+    border: 1px solid rgba(123, 44, 191, 0.3);    /* Prefinjeni ljubičasti obrub */
+    border-radius: 12px;
+    padding: 15px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    justify-content: space-between; /* Gura dugme uvek na dno kartice */
+}
 
+.knjiga-kartica img {
+    width: 100%;
+    height: 250px;
+    object-fit: contain; 
+    border-radius: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
 
+.knjiga-kartica h3 {
+    margin: 10px 0 5px 0;
+    font-size: 1.2rem;
+    color: var(--font_color);
+}
 
-/* HAMBURGER */
+.knjiga-kartica p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+    color: #cbb2fe; /* Svetlija ljubičasto-bela za manje bitan tekst */
+}
+
+/* LINK I DUGME UNUTAR KARTICE */
+.knjiga-kartica a {
+    width: 100%; /* Da bi link obuhvatio celo dugme */
+    text-decoration: none;
+    margin-top: 15px;
+}
+
+.knjiga-kartica button {
+    width: 100%;
+    padding: 10px;
+    background-color: #7b2cbf;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* HOVER EFEKTI ZA KARTICU I DUGME */
+.knjiga-kartica:hover {
+    transform: scale(1.03);
+    border-color: var(--border_color_hover);
+    box-shadow: 0 8px 20px rgba(157, 78, 221, 0.2);
+}
+
+.knjiga-kartica button:hover {
+    background-color: #9d4edd;
+    box-shadow: 0 0 10px rgba(157, 78, 221, 0.5);
+}
+
+/* Poruka kada nema rezultata pretrage */
+.nema-rezultata {
+    grid-column: 1 / -1; /* Rasteže poruku preko celog grida */
+    text-align: center;
+    font-size: 1.2rem;
+    color: #cbb2fe;
+    padding: 40px;
+}
+
+/* HAMBURGER (ostaje nepromenjen) */
 .hamburger_dugme {
     display: none;
     background: transparent;
@@ -119,21 +193,4 @@ body{
     padding: 6px 10px;
     border-radius: 6px;
     cursor: pointer;
-}
-.knjiga-kartica {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-.knjiga-kartica img {
-    width: 100%;
-    height: 250px;
-    object-fit: contain; 
-    border-radius: 10px;
-    padding: 5px;
-    box-sizing: border-box;
-}
-.knjiga-kartica:hover {
-    transform: scale(1.03);
 }

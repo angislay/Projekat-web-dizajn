@@ -1,3 +1,10 @@
+/* IZGLED I POLOŽAJ KONTENJERA */
+.detalji-main {
+    width: 70%;
+    margin: auto;
+    padding-top: 120px;
+}
+
 .knjiga-detalji {
     display: flex;
     align-items: flex-start;
@@ -14,7 +21,28 @@
     width: 250px;
     border-radius: 10px;
 }
+
+/* RECENZIJE I FORMA */
+.recenzija-forma textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.recenzija-forma button {
+    width: 100%;
+}
+
+.prazna-poruka {
+    color: #cbb2fe;
+    font-style: italic;
+}
+
+/* RESPONZIVNOST (MOBILE/TABLET) */
 @media (max-width: 600px) {
+    .detalji-main {
+        width: 90%; /* Dajemo više prostora na manjim ekranima */
+    }
+
     .knjiga-detalji {
         flex-direction: column;
         align-items: center;

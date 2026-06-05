@@ -195,6 +195,7 @@ PRIKAZ ZAVISNO OD USLOVA:
 @keyframes padajuci_meni_pozadina {/* 
     transformise objekat tako sto mu mijenja veličinu po y osi
     vrijednosti predstavljaju razmjeru */
-    from{transform: scaleY(0);}
+    from{transform: scaleY(100);
+    view:100%;}
     to{transform: scaleY(1);}
 }

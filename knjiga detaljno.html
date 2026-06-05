@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="sr">
 <head>
     <link rel="stylesheet" href="kostur_css.css">
@@ -7,68 +8,63 @@
 </head>
 <body>
 
-   <nav class="navbar">
-
+<nav class="navbar">
     <div class="nav-left">
         <button class="login-btn">Пријава</button>
-         <ul class="nav-links">
-        <li><a href="katalog knjiga.html">Почетна</a></li>
-        <li><a href="autori.html">Аутори</a></li>
-        <li><a href="profil.html">Профил</a></li>
-        <li><a href="admin knjige.html">Админ књиге</a></li>
-        <li><a href="admin_autori.html">Админ аутора</a></li>
-    </ul>
+        <ul class="nav-links">
+            <li><a href="katalog knjiga.html">Почетна</a></li>
+            <li><a href="autori.html">Аутори</a></li>
+            <li><a href="profil.html">Профил</a></li>
+            <li><a href="admin knjige.html">Админ књиге</a></li>
+            <li><a href="admin_autori.html">Админ аутора</a></li>
+        </ul>
     </div>
-
-   
 
     <div class="nav-right">
         <button class="hamburger_dugme">☰</button>
         <div class="logo">📚 Књижевни кутак</div>
     </div>
-
 </nav>
 
-<main style="padding-top:120px; width:70%; margin:auto;">
-<div class="knjiga-detalji">
+<main class="detalji-main">
+    <div class="knjiga-detalji">
+        <div class="tekst">
+            <h1 id="knjiga-naslov">Учитавање...</h1>
 
-    <div class="tekst">
-        <h1>Хари Потер и камен мудрости</h1>
+            <p>
+                Аутор: 
+                <a href="autori.html" id="knjiga-autor">Учитавање...</a>
+            </p>
 
-        <p>
-            Аутор: 
-            <a href="autor.html">Џ. К. Роулинг</a>
-        </p>
+            <p id="knjiga-zanr">Жанр: </p>
+            <p id="knjiga-isbn">ISBN: </p>
+            <p id="knjiga-cena">Цена: </p>
 
-        <p>Жанр: Фантазија</p>
+            <hr>
 
-        <hr>
+            <h3>Опис</h3>
+            <p id="knjiga-opis">Кратак опис књиге...</p>
+        </div>
 
-        <h3>Опис</h3>
-        <p>Кратак опис књиге...</p>
+        <div class="slika">
+            <img id="knjiga-slika" src="" alt="Слика књиге">
+        </div>
     </div>
-
-    <div class="slika">
-        <img src="https://www.knjizare-vulkan.rs/files/watermark/files/images/slike_proizvoda/thumbs_w/367397_w_0_0px.jpg">
-    </div>
-
-</div>
 
     <h3>Остави рецензију</h3>
-    <form>
-        <textarea rows="4" style="width:100%;"></textarea><br><br>
-        <button>Пошаљи</button>
-    </form>
+    <div class="recenzija-forma">
+        <textarea id="recenzija-tekst" rows="4" placeholder="Упишите своју рецензију..."></textarea>
+        <button id="btn-posalji-recenziju">Пошаљи</button>
+    </div>
 
     <hr>
 
     <h3>Коментари</h3>
-    <div>
-        <p><b>Милан:</b> Одлична књига!</p>
-        <p><b>Ана:</b> Моја омиљенa</p>
+    <div id="komentari-kontejner">
+        <p class="prazna-poruka">Текстуалне рецензије се учитавају...</p>
     </div>
-
 </main>
 
+<script src="ang_js/detalji o knjizi.js"></script>
 </body>
 </html>
