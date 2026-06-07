@@ -18,20 +18,28 @@ async function preuzmiKnjigeKatalog() {
 
 function prikaziKnjige(knjigeZaPrikaz) {
     let grid = document.getElementById("knjige-grid");
+    if (!grid) return;
     grid.innerHTML = ""; 
 
-    if (Object.keys(knjigeZaPrikaz).length === 0) {
+    let brojKnjiga = Array.isArray(knjigeZaPrikaz) ? knjigeZaPrikaz.length : Object.keys(knjigeZaPrikaz).length;
+
+    if (brojKnjiga === 0) {
         grid.innerHTML = `<p class="nema-rezultata">Нема пронађених књига за задати критеријум.</p>`;
         return;
     }
 
-    for (let id in knjigeZaPrikaz) {
-        let knjiga = knjigeZaPrikaz[id];
-        
-        // Извлачење прве слике из низа у бази
-        let slikaUrl = (knjiga.slike && knjiga.slike.length > 0) 
-            ? knjiga.slike[0] 
-            : "https://via.placeholder.com/150x220?text=Nema+Slike";
+    let nizKnjiga = [];
+    if (Array.isArray(knjigeZaPrikaz)) {
+        nizKnjiga = knjigeZaPrikaz;
+    } else {
+        for (let id in knjigeZaPrikaz) {
+            nizKnjiga.push({ id: id, ...knjigeZaPrikaz[id] });
+        }
+    }
+
+    nizKnjiga.forEach(knjiga => {
+        let id = knjiga.id;
+        let slikaUrl = (knjiga.slike && knjiga.slike.length > 0) ? knjiga.slike[0] : "https://via.placeholder.com/150x220?text=Nema+Slike";
 
         grid.innerHTML += `
             <div class="knjiga-kartica">
@@ -43,7 +51,7 @@ function prikaziKnjige(knjigeZaPrikaz) {
                     <button>Детаљи</button>
                 </a>
             </div>`;
-    }
+    });
 }
 
 //pretrage
@@ -51,50 +59,73 @@ function pretraziKnjige() {
     let kriterijum = document.getElementById("kriterijum").value;
     let tekstPretrage = document.getElementById("pretraga").value.toLowerCase().trim();
 
-    if (tekstPretrage === "") {
-        prikaziKnjige(sveKnjige);
-        return;
-    }
-
-    let filtriraneKnjige = {};
-
+    let nizKnjiga = [];
     for (let id in sveKnjige) {
-        let knjiga = sveKnjige[id];
-        let poklapaSe = false;
-
-        let nazivKnjige = knjiga.naziv ? knjiga.naziv.toLowerCase() : "";
-        let zanrKnjige = knjiga.zanr ? knjiga.zanr.toLowerCase() : "";
-
-        if (kriterijum === "naslov" && nazivKnjige.includes(tekstPretrage)) {
-            poklapaSe = true;
-        } else if (kriterijum === "zanr" && zanrKnjige.includes(tekstPretrage)) {
-            poklapaSe = true;
-        } else if (!kriterijum) {
-            // Ако критеријум није изабран, тражи истовремено у оба поља
-            if (nazivKnjige.includes(tekstPretrage) || zanrKnjige.includes(tekstPretrage)) {
-                poklapaSe = true;
-            }
-        }
-
-        if (poklapaSe) {
-            filtriraneKnjige[id] = knjiga;
-        }
+        nizKnjiga.push({ id: id, ...sveKnjige[id] });
     }
 
-    prikaziKnjige(filtriraneKnjige);
+    if (tekstPretrage !== "") {
+        nizKnjiga = nizKnjiga.filter(knjiga => {
+            let nazivKnjige = knjiga.naziv ? knjiga.naziv.toLowerCase() : "";
+            let zanrKnjige = knjiga.zanr ? knjiga.zanr.toLowerCase() : "";
+
+            if (kriterijum === "naslov") {
+                return nazivKnjige.includes(tekstPretrage);
+            } else if (kriterijum === "zanr") {
+                return zanrKnjige.includes(tekstPretrage);
+            } else if (!kriterijum || kriterijum === "cena-rastuce" || kriterijum === "cena-opadajuce") {
+                return nazivKnjige.includes(tekstPretrage) || zanrKnjige.includes(tekstPretrage);
+            }
+            return false;
+        });
+    }
+
+    if (kriterijum === "naslov") {
+        nizKnjiga.sort((a, b) => (a.naziv || "").localeCompare(b.naziv || "", "sr-Cyrl"));
+    } 
+    else if (kriterijum === "zanr") {
+        nizKnjiga.sort((a, b) => (a.zanr || "").localeCompare(b.zanr || "", "sr-Cyrl"));
+    } 
+    else if (kriterijum === "cena-rastuce") {
+        nizKnjiga.sort((a, b) => Number(a.cena || 0) - Number(b.cena || 0));
+    } 
+    else if (kriterijum === "cena-opadajuce") {
+        nizKnjiga.sort((a, b) => Number(b.cena || 0) - Number(a.cena || 0));
+    }
+
+    prikaziKnjige(nizKnjiga);
 }
 
+// Sve event listenere stavljamo ovde unutra da se pokrenu tek kad se HTML skroz ucita
 document.addEventListener("DOMContentLoaded", () => {
     preuzmiKnjigeKatalog();
 
-    const btnPretraga = document.querySelector(".btn-pretraga");
+    // Reset dugme - SADA JE BEZBEDNO OVDE UNUTRA
+    const btnReset = document.getElementById("btn-reset");
+    if (btnReset) {
+        btnReset.addEventListener("click", function() {
+            document.getElementById("kriterijum").selectedIndex = 0; 
+            document.getElementById("pretraga").value = "";
+            prikaziKnjige(sveKnjige); 
+        });
+    }
+
+    const btnPretraga = document.querySelector(".btn-pretraga:not(#btn-reset)");
     if (btnPretraga) {
         btnPretraga.addEventListener("click", pretraziKnjige);
     }
     
-    document.getElementById("pretraga").addEventListener("keypress", (e) => {
-        if (e.key === "Enter") {
-            pretraziKnjige();
-        }
-    });
+    const selectKriterijum = document.getElementById("kriterijum");
+    if (selectKriterijum) {
+        selectKriterijum.addEventListener("change", pretraziKnjige);
+    }
+    
+    const inputPretraga = document.getElementById("pretraga");
+    if (inputPretraga) {
+        inputPretraga.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                pretraziKnjige();
+            }
+        });
+    }
 });

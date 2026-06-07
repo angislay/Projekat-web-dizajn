@@ -34,17 +34,18 @@
 <header class="drugi-header">
     <h1>Каталог књига</h1>
     <div class="pretraga-kontejner">
-        <select id="kriterijum" class="select-kriterijum">
-            <option value="" disabled selected>Критеријум</option>
-            <option value="naslov">Наслов</option>
-            <option value="autor">Аутор</option>
-            <option value="zanr">Жанр</option>
-        </select>
-        
-        <input type="text" id="pretraga" placeholder="Претражи базу">
-        
-        <button class="btn-pretraga">Тражи</button>
-    </div>
+    <select id="kriterijum" class="select-kriterijum">
+        <option value="naslov">Наслов (А-Ш)</option>
+    <option value="zanr">Жанр (А-Ш)</option>
+    <option value="cena-rastuce">Цена: од најниже</option>
+    <option value="cena-opadajuce">Цена: од највише</option>
+    </select>
+    
+    <input type="text" id="pretraga" placeholder="Претражи базу">
+    
+    <button class="btn-pretraga">Тражи</button>
+    <button id="btn-reset" class="btn-pretraga" style="background-color: #6c757d;">Све књиге</button>
+</div>
 </header>
 
     <div id="knjige-grid" class="grid-kontejner">
@@ -53,5 +54,7 @@
 </div>
 </body>
 <script src="ang_js/knjige.js"></script>
+<script src="ang_js/responsiviti.js"></script>
+
 
 </html>

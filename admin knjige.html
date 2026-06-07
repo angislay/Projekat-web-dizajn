@@ -9,28 +9,22 @@
 </head>
 <body>
     <header>
-        <!-- Твоја стандардна навигација из kostur_css.css -->
-          <nav class="navbar">
-
-    <div class="nav-left">
-        <button class="login-btn">Пријава</button>
-         <ul class="nav-links">
-        <li><a href="katalog knjiga.html">Почетна</a></li>
-        <li><a href="autori.html">Аутори</a></li>
-        <li><a href="profil.html">Профил</a></li>
-        <li><a href="admin knjige.html">Админ књиге</a></li>
-        <li><a href="admin_autori.html">Админ аутора</a></li>
-    </ul>
-    </div>
-
-   
-
-    <div class="nav-right">
-        <button class="hamburger_dugme">☰</button>
-        <div class="logo">📚 Књижевни кутак</div>
-    </div>
-
-</nav>
+        <nav class="navbar">
+            <div class="nav-left">
+                <button class="login-btn">Пријава</button>
+                <ul class="nav-links">
+                    <li><a href="katalog knjiga.html">Почетна</a></li>
+                    <li><a href="autori.html">Аутори</a></li>
+                    <li><a href="profil.html">Профил</a></li>
+                    <li><a href="admin knjige.html">Админ књиге</a></li>
+                    <li><a href="admin_autori.html">Админ аутора</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <button class="hamburger_dugme">☰</button>
+                <div class="logo">📚 Књижевни кутак</div>
+            </div>
+        </nav>
     </header>
 
     <main>
@@ -47,20 +41,14 @@
                         <th>Наслов</th>
                         <th>Аутор</th>
                         <th>Жанр</th>
-                        <th>Година</th>
+                        <th>Цена</th>
+                        <th>ISBN</th>
                         <th>Акције</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tabela-telo">
                     <tr>
-                        <td>На Дрини ћуприја</td>
-                        <td>Иво Андрић</td>
-                        <td>Роман</td>
-                        <td>1945</td>
-                        <td>
-                            <button class="btn-izmeni" onclick="popuniFormuKnjiga('На Дрини ћуприја', 'Иво Андрић', 'Роман', 1945, '978-86...')">Измени</button>
-                            <button class="btn-obrisi">Обриши</button>
-                        </td>
+                        <td colspan="6" style="text-align:center;">Учитавање...</td>
                     </tr>
                 </tbody>
             </table>
@@ -70,36 +58,78 @@
         <div id="forma-knjiga-sekcija" class="forma-kontejner" style="display:none;">
             <hr>
             <h3 id="knjiga-naslov-forme">Додавање књиге</h3>
-            <form id="knjiga-forma">
+            <form id="knjiga-forma" onsubmit="return false;">
+
                 <div class="input-grupa">
-                    <label>Наслов књиге:</label>
-                    <input type="text" id="naslov_knjige" required>
+                    <label>Наслов књиге: <span class="greska" id="gr-naslov"></span></label>
+                    <input type="text" id="naslov_knjige" placeholder="нпр. На Дрини ћуприја">
                 </div>
-                
+
                 <div class="input-grupa">
                     <label>Аутор:</label>
-                    <select id="autor_knjige">
-                        <option value="Ivo Andric">Иво Андрић</option>
-                        <option value="Mesa Selimovic">Меша Селимовић</option>
+                    <select id="autor_knjige"></select>
+                </div>
+
+                <div class="input-grupa">
+                    <label>Опис:</label>
+                    <textarea id="opis_knjige" rows="3" placeholder="Кратак опис књиге..."></textarea>
+                </div>
+
+                <div class="input-grupa">
+                    <label>Жанр: <span class="greska" id="gr-zanr"></span></label>
+                    <input type="text" id="zanr_knjige" placeholder="нпр. Класика">
+                </div>
+
+                <div class="input-grupa">
+                    <label>Формат:</label>
+                    <select id="format_knjige">
+                        <option value="Меки повез">Меки повез</option>
+                        <option value="Тврди повез">Тврди повез</option>
+                        <option value="еКњига">еКњига</option>
                     </select>
                 </div>
 
                 <div class="input-grupa">
-                    <label>Жанр:</label>
-                    <input type="text" id="zanr_knjige">
+                    <label>Цена (РСД): <span class="greska" id="gr-cena"></span></label>
+                    <input type="number" id="cena_knjige" placeholder="нпр. 1500" min="0">
                 </div>
 
                 <div class="input-grupa">
-                    <label>Година издања:</label>
-                    <input type="number" id="godina_knjige">
+                    <label>Број страна: <span class="greska" id="gr-strane"></span></label>
+                    <input type="number" id="strane_knjige" placeholder="нпр. 320" min="1">
+                </div>
+
+                <div class="input-grupa">
+                    <label>ISBN: <span class="greska" id="gr-isbn"></span></label>
+                    <input type="text" id="isbn_knjige" placeholder="нпр. 978-86-7543-123-4">
+                </div>
+
+                <div class="input-grupa">
+                    <label>URL слика (одвојити зарезом):</label>
+                    <textarea id="slike_knjige" rows="2" placeholder="https://example.com/slika1.jpg, https://..."></textarea>
                 </div>
 
                 <div class="form-dugmad">
-                    <button type="submit" class="login-btn">Сачувај измене</button>
+                    <button type="button" class="login-btn" onclick="sacuvajKnjigu()">Сачувај</button>
                     <button type="button" class="btn-obrisi" onclick="zatvoriFormu()">Откажи</button>
                 </div>
             </form>
         </div>
     </main>
+
+    <!-- Кастом дијалог за брисање -->
+    <div id="dijalog-brisanje" class="dijalog-pozadina" style="display:none;">
+        <div class="dijalog-prozor">
+            <h3>Потврда брисања</h3>
+            <p>Да ли сте сигурни да желите да обришете књигу <strong id="dijalog-naziv"></strong>?</p>
+            <div class="dijalog-dugmad">
+                <button class="btn-obrisi" onclick="potvrdiObrisanje()">Обриши</button>
+                <button class="login-btn" onclick="zatvoriDijalog()">Откажи</button>
+            </div>
+        </div>
+    </div>
+
 </body>
-</html> 
+<script src="ang_js/admin knjige.js"></script>
+<script src="ang_js/responsiviti.js"></script>
+</html>

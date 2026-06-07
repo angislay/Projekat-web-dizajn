@@ -53,3 +53,65 @@
         width: 200px;
     }
 }
+/* ================================
+   RESPONZIVNOST — knjiga detaljno
+   ================================ */
+
+/* TABLET (do 900px) */
+@media screen and (max-width: 900px) {
+    .detalji-main {
+        width: 85%;
+    }
+
+    .slika img {
+        width: 200px;
+    }
+}
+
+/* MOBILNI (do 600px) */
+@media screen and (max-width: 600px) {
+    .detalji-main {
+        width: 92%;
+        padding-top: 90px;
+    }
+
+    .knjiga-detalji {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .slika img {
+        width: 160px;
+    }
+
+    .recenzija-forma textarea {
+        font-size: 1rem;
+    }
+
+    /* Nav linkovi */
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--background_color_nav);
+        padding: 10px 0;
+        z-index: 999;
+    }
+
+    .nav-links.otvoren {
+        display: flex;
+    }
+
+    .nav-links li {
+        padding: 8px 20px;
+    }
+
+    .hamburger_dugme {
+        display: block;
+    }
+}
