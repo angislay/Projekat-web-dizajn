@@ -72,6 +72,10 @@ hr{
 .ocjena{
     margin-top: 2%;
 }
+#lista{
+    flex-direction: column;
+    min-height: min-content;
+}
 @media screen and (max-width:600px){
     section{
         flex-direction: column;

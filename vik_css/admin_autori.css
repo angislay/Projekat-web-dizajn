@@ -5,6 +5,7 @@ section{
     height: 70vh;
     padding: 1%;
     overflow-y: auto;
+    overflow-x: hidden;
     flex-wrap: nowrap;
 }
 .element{
@@ -44,7 +45,9 @@ section{
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+    align-items: stretch;
     overflow-y:auto ;
+    overflow-x: hidden;
 }
 .dugmad{
     flex-direction: row;
@@ -61,14 +64,18 @@ form h3{
     padding: 1rem 2rem;
     border-bottom: solid var(--font_color) 2px;
 }
+.poruka{
+    width: 30%;
+    margin: 1rem 2rem;
+    justify-content: start;
+}
 .unos{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 30%;
+    width: 90%;
     font-size: large;
-    margin: 1rem 2rem;
 }
 form input{
     background-color: var(--background_color_nav);
@@ -77,7 +84,7 @@ form input{
     width: 10rem;
     border-radius: 5px;
 }
-form button{
+form button,form input[type="submit"]{
     padding: 10px;
     font-size: medium;
     background-color: var(--background_color_naslov);
@@ -110,15 +117,37 @@ button:hover{
     background-color: red;
     transition: 300ms;
 }
+.poruka span{
+    color: red;
+}
+@media screen and (min-width: 601px) and (max-width: 1024px){
+    .unos{
+        /* margin: 0.5rem 0; */
+        flex-direction: column;
+        height: clamp(min-content,90%,90%);
+    }
+    label{
+        width: 90%;
+    }
+    .poruka span{
+        height: 10%;
+    }
+}
 @media screen and (max-width:600px){
+    .element{
+        flex-direction: column;
+    }
     .kontejner{
         flex-direction: column;
        flex-wrap: nowrap;
        overflow-y:auto;
     }
-    .unos{
-        width: 100%;
+    .poruka{
+        
         margin: 0.5rem 0;
+        width: 100%;
+    }
+    .unos{
         flex-direction: column;
     }
 }
