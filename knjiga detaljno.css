@@ -53,3 +53,97 @@
         width: 200px;
     }
 }
+/* ================================
+   RESPONZIVNOST — knjiga detaljno
+   ================================ */
+
+/* TABLET (do 900px) */
+@media screen and (max-width: 900px) {
+    .detalji-main {
+        width: 85%;
+    }
+
+    .slika img {
+        width: 200px;
+    }
+}
+
+/* MOBILNI (do 600px) */
+@media screen and (max-width: 600px) {
+    .detalji-main {
+        width: 92%;
+        padding-top: 90px;
+    }
+
+    .knjiga-detalji {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .slika img {
+        width: 160px;
+    }
+
+    .recenzija-forma textarea {
+        font-size: 1rem;
+    }
+
+    /* Nav linkovi */
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--background_color_nav);
+        padding: 10px 0;
+        z-index: 999;
+    }
+
+    .nav-links.otvoren {
+        display: flex;
+    }
+
+    .nav-links li {
+        padding: 8px 20px;
+    }
+
+    .hamburger_dugme {
+        display: block;
+    }
+}
+
+/* KOMENTARI */
+.komentar-kartica {
+    background-color: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(123, 44, 191, 0.3);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+}
+
+.komentar-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    opacity: 0.75;
+    margin-bottom: 6px;
+}
+
+.komentar-tekst {
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* PORUKA ISPOD FORME */
+.recenzija-poruka {
+    margin-top: 8px;
+    font-size: 0.95rem;
+    min-height: 1.2rem;
+}
+
+.recenzija-poruka.uspeh { color: #4caf50; }
+.recenzija-poruka.greska { color: #e63946; }

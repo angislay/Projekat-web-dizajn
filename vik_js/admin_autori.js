@@ -2,6 +2,8 @@ let firebaseUrl="https://web-projekat-602fa-default-rtdb.firebaseio.com";
 let autori={};
 const prozor=document.querySelector(".izmjena");
 
+
+
 async function preuzmi_autore(){
     const odg=await fetch(firebaseUrl+"/autori.json");
     autori=await odg.json() || {};

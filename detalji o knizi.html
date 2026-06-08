@@ -1,51 +1,36 @@
-<!DOCTYPE html>
-<html lang="sr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="kostur_css.css">
-    <link rel="stylesheet" href="detalji o knjizi.css"> <title>Детаљи о књизи</title>
+    <link rel="stylesheet" href="login prozor.css"> <meta charset="UTF-8">
+
+    
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     -->
+    <!-- pronasla na netu ovo, vezano za poresavanje stranice
+     zavisno od sirine prozora, mozda kasnije zatreba -->
+    <title>Почетна страница</title>
 </head>
 <body>
-
     <header>
         <div class="naslov">
-            <h2>📚 Књижевни кутак</h2>
+        <h2>Страница</h2>
         </div>
         <nav>
             <div class="hamburger">
-                <button class="hamburger_dugme" id="hamburger-btn">meni</button>
+                <button class="hamburger_dugme"">meni</button>
             </div>
-            <div class="nav_padajuci_meni" id="meni-sadrzaj">
+            <div class="nav_padajuci_meni">
                 <ul>
-                    <li><a href="katalog knjiga.html">Почетна</a></li>
-                    <li><a href="autori.html">Аутори</a></li>
-                    <li><a href="profil.html">Профил</a></li>
-                    <li><a href="admin knjige.html">Админ књиге</a></li>
+                    <li><a href="">stranica 1</a></li>
+                    <li><a href="">stranica 2</a></li>
+                    <li><a href="">stranica 3</a></li>
                 </ul> 
             </div>
         </nav>
     </header>
-
-    <main class="glavni-sadrzaj">
-        <div id="detalji-kontejner" class="knjiga-detalji">
-            <p class="ucitavanje-poruka">Учитавање детаља о књизи...</p>
-        </div>
-
-        <section class="recenzije-sekcija">
-            <h3>Оставите рецензију</h3>
-            <div class="forma-recenzija">
-                <textarea id="tekst-recenzije" placeholder="Напишите ваше утиске о књизи..."></textarea>
-                <button class="btn-recenzija" id="btn-posalji-recenziju">Пошаљи рецензију</button>
-            </div>
-            
-            <h3>Претходни коментари</h3>
-            <div id="lista-recenzija">
-                <p class="prazni-komentari">Текстуалне рецензије за ову књигу се учитавају...</p>
-            </div>
-        </section>
-    </main>
-
-    <script src="ang_js/detalji o knjizi.js"></script>
 </body>
+<script src="kostur_js.js"></script>
+<script src="login prozor.js"></script>
+
 </html>

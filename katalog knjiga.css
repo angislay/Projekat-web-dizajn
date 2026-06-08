@@ -1,21 +1,18 @@
-
 :root{
-    /* inicijalizacija nekih varijabla 
-    (vjerovatno će nam trebati kasnije za light/dark mode) */
     --background_color:rgb(53, 8, 90);
     --background_color_naslov: rgb(53, 8, 90);
     --background_color_nav:rgb(35, 9, 84);
-        --border_color:#7b2cbf;
+    --border_color:#7b2cbf;
     --border_color_hover:#9d4edd;
     --font_color:white;
 }
+
 body{
     background-color: var(--background_color);
     color: var(--font_color);
     margin: 0;  
     padding-top: 90px;
 }
-
 
 .drugi-header {
     display: flex;
@@ -32,7 +29,6 @@ body{
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
-
 .grid-kontejner {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -40,12 +36,11 @@ body{
     padding: 20px;
 }
 
-
 .pretraga-kontejner {
     display: flex;
-    gap: 10px; /* Razmak između select-a, inputa i dugmeta */
+    gap: 10px;
     width: 100%;
-    max-width: 600px; /* Da ne bi bilo preširoko na velikim ekranima */
+    max-width: 600px;
 }
 
 .select-kriterijum {
@@ -53,40 +48,42 @@ body{
     border-radius: 8px;
     border: 2px solid #7b2cbf;
     background-color: rgba(255, 255, 255, 0.1);
-    color: white; /* Tekst u zatvorenom select-u će biti beo */
+    color: white;
     font-size: 1rem;
     outline: none;
     cursor: pointer;
     appearance: none;
 }
+
 .select-kriterijum option {
     background-color: var(--background_color);
-    color: white; /* beli tekst za opcijice */
+    color: white;
     padding: 10px;
 }
+
 .select-kriterijum option:hover {
-    background-color: #9d4edd; /* Svetlija ljubicasta kada bi stavila miss */
+    background-color: #9d4edd;
 }
 
 #pretraga {
-
-
     border: 2px solid #7b2cbf; 
     background-color: rgba(255, 255, 255, 0.1);
     color: white;
-    flex-grow: 1; /*input zauzima sve ostalo*/
+    flex-grow: 1;
     padding: 12px 15px; 
     border-radius: 8px; 
     font-size: 1rem;
     outline: none;
     transition: 0.3s;
 }
+
 .select-kriterijum:focus, #pretraga:focus {
     border-color: #9d4edd; 
     background-color: rgba(255, 255, 255, 0.2);
 }
+
 .btn-pretraga {
-   padding: 12px 25px;
+    padding: 12px 25px;
     background-color: #7b2cbf;
     color: white;
     border: none;
@@ -100,25 +97,23 @@ body{
     background-color: #9d4edd;
     box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
 }
+
 #pretraga::placeholder {
     color: #cbb2fe;
 }
 
-
-
-/* KARTICE KNJIGA */
 .knjiga-kartica {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.05); /* Blaga prozirna pozadina */
-    border: 1px solid rgba(123, 44, 191, 0.3);    /* Prefinjeni ljubičasti obrub */
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(123, 44, 191, 0.3);
     border-radius: 12px;
     padding: 15px;
     box-sizing: border-box;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    justify-content: space-between; /* Gura dugme uvek na dno kartice */
+    justify-content: space-between;
 }
 
 .knjiga-kartica img {
@@ -140,12 +135,11 @@ body{
 .knjiga-kartica p {
     margin: 5px 0;
     font-size: 0.95rem;
-    color: #cbb2fe; /* Svetlija ljubičasto-bela za manje bitan tekst */
+    color: #cbb2fe;
 }
 
-/* LINK I DUGME UNUTAR KARTICE */
 .knjiga-kartica a {
-    width: 100%; /* Da bi link obuhvatio celo dugme */
+    width: 100%;
     text-decoration: none;
     margin-top: 15px;
 }
@@ -162,7 +156,6 @@ body{
     transition: 0.3s;
 }
 
-/* HOVER EFEKTI ZA KARTICU I DUGME */
 .knjiga-kartica:hover {
     transform: scale(1.03);
     border-color: var(--border_color_hover);
@@ -174,16 +167,14 @@ body{
     box-shadow: 0 0 10px rgba(157, 78, 221, 0.5);
 }
 
-/* Poruka kada nema rezultata pretrage */
 .nema-rezultata {
-    grid-column: 1 / -1; /* Rasteže poruku preko celog grida */
+    grid-column: 1 / -1;
     text-align: center;
     font-size: 1.2rem;
     color: #cbb2fe;
     padding: 40px;
 }
 
-/* HAMBURGER (ostaje nepromenjen) */
 .hamburger_dugme {
     display: none;
     background: transparent;
@@ -193,4 +184,95 @@ body{
     padding: 6px 10px;
     border-radius: 6px;
     cursor: pointer;
+}
+
+#btn-reset {
+    background-color: #7b2cbf;
+}
+
+#btn-reset:hover {
+    background-color: #9d4edd;
+    box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
+}
+/* ================================
+   RESPONZIVNOST — katalog knjiga
+   ================================ */
+
+/* TABLET (do 900px) */
+@media screen and (max-width: 900px) {
+    .drugi-header h1 {
+        font-size: 2rem;
+    }
+
+    .grid-kontejner {
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+        gap: 15px;
+        padding: 15px;
+    }
+}
+
+/* MOBILNI (do 600px) */
+@media screen and (max-width: 600px) {
+    body {
+        padding-top: 70px;
+    }
+
+    /* Navbar — sakriva linkove, pokazuje hamburger */
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--background_color_nav);
+        padding: 10px 0;
+        z-index: 999;
+    }
+
+    .nav-links.otvoren {
+        display: flex;
+    }
+
+    .nav-links li {
+        padding: 8px 20px;
+    }
+
+    .hamburger_dugme {
+        display: block;
+    }
+
+    /* Pretraga — slaže se vertikalno */
+    .pretraga-kontejner {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 100%;
+    }
+
+    .select-kriterijum,
+    #pretraga,
+    .btn-pretraga {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .drugi-header {
+        padding: 20px 15px;
+    }
+
+    .drugi-header h1 {
+        font-size: 1.6rem;
+        text-align: center;
+    }
+
+    /* Grid — jedna kolona */
+    .grid-kontejner {
+        grid-template-columns: 1fr;
+        padding: 10px;
+        gap: 12px;
+    }
+
+    .knjiga-kartica img {
+        height: 200px;
+    }
 }
