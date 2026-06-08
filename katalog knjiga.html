@@ -2,59 +2,126 @@
 <head>
     <link rel="stylesheet" href="katalog knjiga.css">
     <link rel="stylesheet" href="kostur_css.css">
-    <meta charset="UTF-8">
+    <link rel="stylesheet" href="login prozor.css"> <meta charset="UTF-8">
     <title>Почетна страница</title>
 </head>
 <body>
           
-       <div class="knjige-sekcija">
-    
-   <nav class="navbar">
+    <div class="knjige-sekcija">
+        <nav class="navbar">
+            <div class="nav-left">
+                <button class="login-btn">Пријава</button>
+                <ul class="nav-links">
+                    <li><a href="katalog knjiga.html">Почетна</a></li>
+                    <li><a href="autori.html">Аутори</a></li>
+                    <li><a href="profil.html">Профил</a></li>
+                    <li><a href="admin knjige.html">Админ књиге</a></li>
+                    <li><a href="admin_autori.html">Админ аутора</a></li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                <button class="hamburger_dugme">☰</button>
+                <div class="logo">📚 Књижевни кутак</div>
+            </div>
+        </nav>
 
-    <div class="nav-left">
-        <button class="login-btn">Пријава</button>
-         <ul class="nav-links">
-        <li><a href="katalog knjiga.html">Почетна</a></li>
-        <li><a href="autori.html">Аутори</a></li>
-        <li><a href="profil.html">Профил</a></li>
-        <li><a href="admin knjige.html">Админ књиге</a></li>
-        <li><a href="admin_autori.html">Админ аутора</a></li>
-    </ul>
+        <header class="drugi-header">
+            <h1>Каталог књига</h1>
+            <div class="pretraga-kontejner">
+                <select id="kriterijum" class="select-kriterijum">
+                    <option value="naslov">Наслов (А-Ш)</option>
+                    <option value="zanr">Жанр (А-Ш)</option>
+                    <option value="cena-rastuce">Цена: од најниже</option>
+                    <option value="cena-opadajuce">Цена: од највише</option>
+                </select>
+                <input type="text" id="pretraga" placeholder="Претражи базу">
+                <button class="btn-pretraga">Тражи</button>
+                <button id="btn-reset" class="btn-pretraga" style="background-color: #6c757d;">Све књиге</button>
+            </div>
+        </header>
+
+        <div id="knjige-grid" class="grid-kontejner"></div>
+    </div> <div class="login-modal-pozadina" id="login-modal">
+        <div class="login-modal-prozor">
+            <div class="login-tabovi">
+                <button class="login-tab aktivan" id="tab-prijava" onclick="loginPrikaziTab('prijava')">Пријава</button>
+                <button class="login-tab" id="tab-registracija" onclick="loginPrikaziTab('registracija')">Регистрација</button>
+                <button class="login-modal-zatvori" onclick="zatvoriLoginModal()">✕</button>
+            </div>
+
+            <div class="login-sekcija" id="sekcija-prijava">
+                <h3>Добродошли назад</h3>
+                <div class="login-unos">
+                    <label>Корисничко име:</label>
+                    <input type="text" id="prijava-korisnicko-ime" placeholder="нпр. tatjana_p">
+                    <span class="login-greska" id="gr-prijava-ime"></span>
+                </div>
+                <div class="login-unos">
+                    <label>Лозинка:</label>
+                    <input type="password" id="prijava-lozinka" placeholder="Лозинка">
+                    <span class="login-greska" id="gr-prijava-lozinka"></span>
+                </div>
+                <p class="login-greska" id="gr-prijava-opsta"></p>
+                <p class="login-uspeh" id="uspeh-prijava"></p>
+                <button class="login-submit-btn" onclick="prijaviKorisnika()">Пријави се</button>
+            </div>
+
+            <div class="login-sekcija" id="sekcija-registracija" style="display:none;">
+                <h3>Направите налог</h3>
+                <div class="login-red">
+                    <div class="login-unos">
+                        <label>Ime:</label>
+                        <input type="text" id="reg-ime" placeholder="нпр. Татјана">
+                        <span class="login-greska" id="gr-reg-ime"></span>
+                    </div>
+                    <div class="login-unos">
+                        <label>Презиме:</label>
+                        <input type="text" id="reg-prezime" placeholder="нпр. Петровић">
+                        <span class="login-greska" id="gr-reg-prezime"></span>
+                    </div>
+                </div>
+                <div class="login-red">
+                    <div class="login-unos">
+                        <label>Корисничко име:</label>
+                        <input type="text" id="reg-korisnicko-ime" placeholder="нпр. tatjana_p">
+                        <span class="login-greska" id="gr-reg-korisnicko"></span>
+                    </div>
+                    <div class="login-unos">
+                        <label>Email:</label>
+                        <input type="email" id="reg-email" placeholder="email@example.com">
+                        <span class="login-greska" id="gr-reg-email"></span>
+                    </div>
+                </div>
+                <div class="login-red">
+                    <div class="login-unos">
+                        <label>Лозинка:</label>
+                        <input type="password" id="reg-lozinka" placeholder="Лозинка">
+                        <span class="login-greska" id="gr-reg-lozinka"></span>
+                    </div>
+                    <div class="login-unos">
+                        <label>Датум рођења:</label>
+                        <input type="date" id="reg-datum">
+                        <span class="login-greska" id="gr-reg-datum"></span>
+                    </div>
+                </div>
+                <div class="login-unos">
+                    <label>Адреса:</label>
+                    <input type="text" id="reg-adresa" placeholder="нпр. Београдска 1, Београд">
+                    <span class="login-greska" id="gr-reg-adresa"></span>
+                </div>
+                <div class="login-unos">
+                    <label>Занимање:</label>
+                    <input type="text" id="reg-zanimanje" placeholder="нпр. Програмер">
+                </div>
+                <p class="login-greska" id="gr-reg-opsta"></p>
+                <p class="login-uspeh" id="uspeh-registracija"></p>
+                <button class="login-submit-btn" onclick="registrujKorisnika()">Региструј се</button>
+            </div>
+        </div>
     </div>
 
-   
-
-    <div class="nav-right">
-        <button class="hamburger_dugme">☰</button>
-        <div class="logo">📚 Књижевни кутак</div>
-    </div>
-
-</nav>
-
-<header class="drugi-header">
-    <h1>Каталог књига</h1>
-    <div class="pretraga-kontejner">
-    <select id="kriterijum" class="select-kriterijum">
-        <option value="naslov">Наслов (А-Ш)</option>
-    <option value="zanr">Жанр (А-Ш)</option>
-    <option value="cena-rastuce">Цена: од најниже</option>
-    <option value="cena-opadajuce">Цена: од највише</option>
-    </select>
-    
-    <input type="text" id="pretraga" placeholder="Претражи базу">
-    
-    <button class="btn-pretraga">Тражи</button>
-    <button id="btn-reset" class="btn-pretraga" style="background-color: #6c757d;">Све књиге</button>
-</div>
-</header>
-
-    <div id="knjige-grid" class="grid-kontejner">
-         
-
-</div>
+    <script src="ang_js/knjige.js"></script>
+    <script src="ang_js/responsiviti.js"></script>
+    <script src="login prozor.js"></script>
 </body>
-<script src="ang_js/knjige.js"></script>
-<script src="ang_js/responsiviti.js"></script>
-
-
 </html>

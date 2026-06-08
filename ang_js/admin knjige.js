@@ -2,9 +2,9 @@ const firebaseUrl = "https://web-projekat-602fa-default-rtdb.firebaseio.com";
 
 let sveKnjige = {};
 let sviAutori = {};
-let trenutniRezim = "dodaj";   // "dodaj" ili "izmeni"
-let trenutniIdKnjige = null;   // id knjige koja se menja
-let idZaBrisanje = null;       // id knjige koja se brise
+let trenutniRezim = "dodaj";
+let trenutniIdKnjige = null;
+let idZaBrisanje = null;
 
 // ========================
 //  UČITAVANJE PODATAKA
@@ -28,7 +28,6 @@ async function ucitajAutore() {
         popuniSelectAutora();
     } catch (e) {
         console.error("Грешка при учитавању аутора:", e);
-        // Forma i dalje radi, select ce biti prazan
         popuniSelectAutora();
     }
 }
@@ -85,28 +84,20 @@ function popuniSelectAutora() {
 }
 
 // ========================
-//  FORMA — OTVARANJE
+//  MODAL — OTVARANJE/ZATVARANJE
 // ========================
 
 function otvoriFormu(rezim) {
     trenutniRezim = rezim;
-
-    const sekcija = document.getElementById("forma-knjiga-sekcija");
-    const naslov = document.getElementById("knjiga-naslov-forme");
-
-    // Prvo prikazujemo sekciju, pa tek onda radimo ostalo
-    sekcija.style.display = "block";
-
     ocistiGreske();
 
     if (rezim === "dodaj") {
-        naslov.textContent = "Додавање нове књиге";
+        document.getElementById("knjiga-naslov-forme").textContent = "Додавање нове књиге";
         ocistiFormu();
         trenutniIdKnjige = null;
     }
 
-    // Kratko odlaganje da browser uspije da renderuje prije scrolla
-    setTimeout(() => sekcija.scrollIntoView({ behavior: "smooth" }), 50);
+    document.getElementById("modal-knjiga").style.display = "flex";
 }
 
 function otvoriFormuZaIzmenu(id) {
@@ -114,10 +105,9 @@ function otvoriFormuZaIzmenu(id) {
     const k = sveKnjige[id];
     if (!k) return;
 
-    otvoriFormu("izmeni");
     document.getElementById("knjiga-naslov-forme").textContent = "Измена књиге";
+    ocistiGreske();
 
-    // Popunjavanje forme postojecim podacima
     document.getElementById("naslov_knjige").value = k.naziv || "";
     document.getElementById("opis_knjige").value = k.opis || "";
     document.getElementById("zanr_knjige").value = k.zanr || "";
@@ -126,25 +116,33 @@ function otvoriFormuZaIzmenu(id) {
     document.getElementById("isbn_knjige").value = k.isbn || "";
     document.getElementById("slike_knjige").value = k.slike ? k.slike.join(", ") : "";
 
-    // Format select
     const formatSel = document.getElementById("format_knjige");
     for (let opt of formatSel.options) {
         if (opt.value === k.format) { opt.selected = true; break; }
     }
 
-    // Autor select
     const autorSel = document.getElementById("autor_knjige");
     for (let opt of autorSel.options) {
         if (opt.value === k.idAutora) { opt.selected = true; break; }
     }
+
+    trenutniRezim = "izmeni";
+    document.getElementById("modal-knjiga").style.display = "flex";
 }
 
 function zatvoriFormu() {
-    document.getElementById("forma-knjiga-sekcija").style.display = "none";
+    document.getElementById("modal-knjiga").style.display = "none";
     ocistiFormu();
     ocistiGreske();
     trenutniIdKnjige = null;
 }
+
+// Zatvaranje klikom na pozadinu
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("modal-knjiga").addEventListener("click", function(e) {
+        if (e.target === this) zatvoriFormu();
+    });
+});
 
 function ocistiFormu() {
     document.getElementById("naslov_knjige").value = "";
@@ -163,8 +161,6 @@ function ocistiFormu() {
 //  VALIDACIJA
 // ========================
 
-const regexISBN = /^(978|979)-?\d{1,5}-?\d{1,7}-?\d{1,7}-?\d$/;
-// Tačna provera: 13 cifara koje počinju sa 978 ili 979, sa opcionalnim crticama
 function validanISBN(vrednost) {
     const samoCifre = vrednost.replace(/-/g, "");
     return /^(978|979)\d{10}$/.test(samoCifre);
@@ -219,7 +215,7 @@ function validirajFormu() {
 }
 
 // ========================
-//  ČUVANJE (bez upisa u Firebase za DZ2)
+//  ČUVANJE
 // ========================
 
 function sacuvajKnjigu() {
@@ -241,13 +237,11 @@ function sacuvajKnjigu() {
     };
 
     if (trenutniRezim === "izmeni" && trenutniIdKnjige) {
-        // Lokalna izmena u objektu (upis u Firebase za finalnu odbranu)
         sveKnjige[trenutniIdKnjige] = { ...sveKnjige[trenutniIdKnjige], ...novaKnjiga };
         prikaziTabelu();
         zatvoriFormu();
         prikaziPoruku("✅ Измена је успешно сачувана (локално).");
     } else {
-        // Dodavanje nove knjige lokalno
         const noviId = "knj_novo_" + Date.now();
         sveKnjige[noviId] = novaKnjiga;
         prikaziTabelu();
@@ -269,7 +263,7 @@ function prikaziPoruku(tekst) {
 }
 
 // ========================
-//  BRISANJE — KАСТОМ DIJALOG
+//  BRISANJE
 // ========================
 
 function otvoriBrisanje(id) {
@@ -299,4 +293,4 @@ function potvrdiObrisanje() {
 document.addEventListener("DOMContentLoaded", async () => {
     await ucitajAutore();
     await ucitajKnjige();
-});
+}); 

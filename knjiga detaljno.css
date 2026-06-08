@@ -115,3 +115,35 @@
         display: block;
     }
 }
+
+/* KOMENTARI */
+.komentar-kartica {
+    background-color: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(123, 44, 191, 0.3);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+}
+
+.komentar-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    opacity: 0.75;
+    margin-bottom: 6px;
+}
+
+.komentar-tekst {
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* PORUKA ISPOD FORME */
+.recenzija-poruka {
+    margin-top: 8px;
+    font-size: 0.95rem;
+    min-height: 1.2rem;
+}
+
+.recenzija-poruka.uspeh { color: #4caf50; }
+.recenzija-poruka.greska { color: #e63946; }

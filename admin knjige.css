@@ -279,3 +279,95 @@ button {
         width: 100%;
     }
 }
+/* ========================
+   MODAL ZA FORMU KNJIGE
+   ======================== */
+
+.modal-pozadina {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-prozor {
+    background: linear-gradient(135deg, #f3e8ff, #e0aaff);
+    color: #1a1a2e;
+    border-radius: 15px;
+    padding: 30px 35px;
+    width: 90%;
+    max-width: 750px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+
+.modal-prozor h3 {
+    margin-top: 0;
+    color: #5a189a;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}
+
+.kontejner-forme {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.unos-modal {
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 8px);
+    box-sizing: border-box;
+}
+
+.unos-modal.unos-siri {
+    width: 100%;
+}
+
+.unos-modal.modal-dugmad {
+    width: 100%;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.unos-modal label {
+    font-weight: bold;
+    color: #3c096c;
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+}
+
+.unos-modal input,
+.unos-modal select,
+.unos-modal textarea {
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 0.95rem;
+    background: white;
+    color: #1a1a2e;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.unos-modal textarea {
+    resize: vertical;
+}
+
+@media screen and (max-width: 600px) {
+    .unos-modal {
+        width: 100%;
+    }
+
+    .modal-prozor {
+        padding: 20px;
+        max-height: 90vh;
+    }
+}

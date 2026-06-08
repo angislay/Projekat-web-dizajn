@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="kostur_css.css">
     <link rel="stylesheet" href="admin knjige.css">
+        <link rel="stylesheet" href="login prozor.css"> <meta charset="UTF-8">
+
     <title>Админ - Управљање књигама</title>
 </head>
 <body>
@@ -53,34 +55,35 @@
                 </tbody>
             </table>
         </div>
+    </main>
 
-        <!-- Форма за Књиге (скривена) -->
-        <div id="forma-knjiga-sekcija" class="forma-kontejner" style="display:none;">
-            <hr>
+    <!-- MODAL: Форма за књигу -->
+    <div id="modal-knjiga" class="modal-pozadina" style="display:none;">
+        <div class="modal-prozor">
             <h3 id="knjiga-naslov-forme">Додавање књиге</h3>
-            <form id="knjiga-forma" onsubmit="return false;">
+            <div class="kontejner-forme">
 
-                <div class="input-grupa">
-                    <label>Наслов књиге: <span class="greska" id="gr-naslov"></span></label>
+                <div class="unos-modal">
+                    <label>Наслов: <span class="greska" id="gr-naslov"></span></label>
                     <input type="text" id="naslov_knjige" placeholder="нпр. На Дрини ћуприја">
                 </div>
 
-                <div class="input-grupa">
+                <div class="unos-modal">
                     <label>Аутор:</label>
                     <select id="autor_knjige"></select>
                 </div>
 
-                <div class="input-grupa">
+                <div class="unos-modal unos-siri">
                     <label>Опис:</label>
                     <textarea id="opis_knjige" rows="3" placeholder="Кратак опис књиге..."></textarea>
                 </div>
 
-                <div class="input-grupa">
+                <div class="unos-modal">
                     <label>Жанр: <span class="greska" id="gr-zanr"></span></label>
                     <input type="text" id="zanr_knjige" placeholder="нпр. Класика">
                 </div>
 
-                <div class="input-grupa">
+                <div class="unos-modal">
                     <label>Формат:</label>
                     <select id="format_knjige">
                         <option value="Меки повез">Меки повез</option>
@@ -89,36 +92,37 @@
                     </select>
                 </div>
 
-                <div class="input-grupa">
+                <div class="unos-modal">
                     <label>Цена (РСД): <span class="greska" id="gr-cena"></span></label>
                     <input type="number" id="cena_knjige" placeholder="нпр. 1500" min="0">
                 </div>
 
-                <div class="input-grupa">
+                <div class="unos-modal">
                     <label>Број страна: <span class="greska" id="gr-strane"></span></label>
                     <input type="number" id="strane_knjige" placeholder="нпр. 320" min="1">
                 </div>
 
-                <div class="input-grupa">
+                <div class="unos-modal">
                     <label>ISBN: <span class="greska" id="gr-isbn"></span></label>
                     <input type="text" id="isbn_knjige" placeholder="нпр. 978-86-7543-123-4">
                 </div>
 
-                <div class="input-grupa">
+                <div class="unos-modal unos-siri">
                     <label>URL слика (одвојити зарезом):</label>
-                    <textarea id="slike_knjige" rows="2" placeholder="https://example.com/slika1.jpg, https://..."></textarea>
+                    <textarea id="slike_knjige" rows="2" placeholder="https://example.com/slika1.jpg, ..."></textarea>
                 </div>
 
-                <div class="form-dugmad">
+                <div class="unos-modal modal-dugmad">
                     <button type="button" class="login-btn" onclick="sacuvajKnjigu()">Сачувај</button>
-                    <button type="button" class="btn-obrisi" onclick="zatvoriFormu()">Откажи</button>
+                    <button type="button" class="btn-obrisi" onclick="zatvoriFormu()">Одустани</button>
                 </div>
-            </form>
+
+            </div>
         </div>
-    </main>
+    </div>
 
     <!-- Кастом дијалог за брисање -->
-    <div id="dijalog-brisanje" class="dijalog-pozadina" style="display:none;">
+    <div id="dijalog-brisanje" class="modal-pozadina" style="display:none;">
         <div class="dijalog-prozor">
             <h3>Потврда брисања</h3>
             <p>Да ли сте сигурни да желите да обришете књигу <strong id="dijalog-naziv"></strong>?</p>
@@ -132,4 +136,5 @@
 </body>
 <script src="ang_js/admin knjige.js"></script>
 <script src="ang_js/responsiviti.js"></script>
+<script src="login prozor.js"></script>
 </html>
