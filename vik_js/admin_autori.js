@@ -60,7 +60,7 @@ document.querySelector(".izmjena").addEventListener("submit",function(e){
         {
             input_id: "unos_ime",
             span_id: "poruka_ime",
-            regex: /^[A-Za-zА-Яа-яЋћЂђЏџШшЖж\s]+$/,
+            regex: /.*\S.*/,
             poruka_greske: "Име мора почети великим словом и садржати само слова."
         },
         {
