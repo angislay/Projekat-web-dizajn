@@ -1,44 +1,46 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="kostur_css.css">
-    <link rel="stylesheet" href="profil.css">  
-      
+    <!-- <link rel="stylesheet" href="kostur_css.css">
+    <link rel="stylesheet" href="admin_autori.css"> -->
+    <link rel="stylesheet" href="vik_css/sve.css">
+    <link rel="stylesheet" href="vik_css/profil.css">   
+ 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">
      -->
     <!-- pronasla na netu ovo, vezano za poresavanje stranice
      zavisno od sirine prozora, mozda kasnije zatreba -->
-    <title>Мој Профил</title>
+    <title>Админ: Аутори</title>
 </head>
 <body>
     <header>
-       <nav class="navbar">
-
-    <div class="nav-left">
-        <button class="login-btn">Пријава</button>
-         <ul class="nav-links">
-        <li><a href="katalog knjiga.html">Почетна</a></li>
-        <li><a href="autori.html">Аутори</a></li>
-        <li><a href="profil.html">Профил</a></li>
-        <li><a href="admin knjige.html">Админ књиге</a></li>
-        <li><a href="admin_autori.html">Админ аутора</a></li>
-    </ul>
-    </div>
-
-   
-
-    <div class="nav-right">
-        <button class="hamburger_dugme">☰</button>
-        <div class="logo">📚 Књижевни кутак</div>
-    </div>
-
-</nav>
-</header>
+        <nav>
+            <div class="levo">
+                
+                <button>Пријава</button>
+                    <div class="hamburger">
+                    <button id="hamburger_dugme" onclick="padajuci_meni()">meni</button>
+                
+                <div class="padajuci_meni">
+                    <ul>
+                        <li><a href="katalog knjiga.html">Почетна</a></li>
+                        <li><a href="autori.html">Аутори</a></li>
+                        <li><a href="profil.html">Профил</a></li>
+                        <li><a href="admin knjige.html">Админ књиге</a></li>
+                        <li><a href="admin_autori.html">Админ аутора</a></li>
+                    </ul> 
+                </div>
+                </div>
+            </div>    
+            <div class="desno"></div> 
+        </nav>
+    </header>
 
     <main>
         <aside>
-            Корисничко име: <br>
+            Корисничко име:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa <br>
             Лозинка: <br>
             Име: <br>
             Презиме: <br>
@@ -47,28 +49,28 @@
             Адреса: <br>
         </aside>
   
-        <div class="sadrzaj">
-            <div class="tabovi">
-                <button onclick="prikaziTab('recenzije')">Рецензије</button>
-                <button onclick="prikaziTab('ocjene')">Оцјене</button>
-            </div>
-            <div class="recenzije tab">
-    <div class="recenzija">
-        <h3><a href="knjiga_na_drinici_cuprija.html">На Дрини ћуприја</a></h3>
-        <p>
-            Одлична књига која приказује историју и живот људи на овим просторима.
-            Стил писања је веома богат и описан.
-        </p>
-    </div>
+            <div class="sadrzaj">
+                <div class="tabovi">
+                    <button onclick="prikaziTab('recenzije')">Рецензије</button>
+                    <button onclick="prikaziTab('ocjene')">Оцјене</button>
+                </div>
+                <div class="recenzije tab">
+        <!-- <div class="recenzija">
+            <h3><a href="knjiga_na_drinici_cuprija.html">На Дрини ћуприја</a></h3>
+            <p>
+                Одлична књига која приказује историју и живот људи на овим просторима.
+                Стил писања је веома богат и описан.
+            </p>
+        </div>
 
-    <div class="recenzija">
-        <h3><a href="knjiga_prokleta_avlija.html">Проклета авлија</a></h3>
-        <p>
-            Кратка али снажна прича. Атмосфера је мрачна и напета,
-            а ликови су веома упечатљиви.
-        </p>
-    </div>
-</div>
+            <div class="recenzija">
+                <h3><a href="knjiga_prokleta_avlija.html">Проклета авлија</a></h3>
+                <p>
+                    Кратка али снажна прича. Атмосфера је мрачна и напета,
+                    а ликови су веома упечатљиви.
+                </p>
+            </div> -->
+        </div>
             <div class="ocjene tab">
                 <div class="ocjena">
                     <a href="autor.html">Иво Андрић</a>
@@ -85,5 +87,6 @@
         </div>
     </main>
 </body>
-<script src="kostur_js.js"></script>
+<script src="vik_js/profil.js"></script>
+<script src="vik_js/sve.js"></script>
 </html>
