@@ -14,33 +14,7 @@
      zavisno od sirine prozora, mozda kasnije zatreba -->
     <title>Аутор</title>
 </head>
-<body><!-- 
-    <header>
-        <div class="naslov">
-        <h2>Претрага аутора</h2>
-        </div>
-         <nav class="navbar">
-
-    <div class="nav-left">
-        <button class="login-btn">Пријава</button>
-         <ul class="nav-links">
-        <li><a href="katalog knjiga.html">Почетна</a></li>
-        <li><a href="autori.html">Аутори</a></li>
-        <li><a href="profil.html">Профил</a></li>
-        <li><a href="admin knjige.html">Админ књиге</a></li>
-        <li><a href="admin_autori.html">Админ аутора</a></li>
-    </ul>
-    </div>
-
-   
-
-    <div class="nav-right">
-        <button class="hamburger_dugme">☰</button>
-        <div class="logo">📚 Књижевни кутак</div>
-    </div>
-
-</nav>
-    </header> -->
+<body>
     <header>
         <nav>
             <div class="levo">
@@ -66,14 +40,13 @@
 
     <main>
         <form action="">
-            <select name="" id="">
+            <select name="" id="selekcija" oninput="pretrazi()">
                 <option value="svi" selected>Сви статуси</option>
-                <option value="aktivan">Активан</option>
-                <option value="u_penziji">У пензији</option>
-                <option value="preminuo">Преминуо</option>
+                <option value="Активан">Активан</option>
+                <option value="У пензији">У пензији</option>
+                <option value="Преминуо">Преминуо</option>
             </select>
-            <input type="text">
-            <button>Претражи</button>
+            <input type="text" id="unos" oninput="pretrazi()">
         </form>
         <section id="ispis">
           <div class="ocjena">

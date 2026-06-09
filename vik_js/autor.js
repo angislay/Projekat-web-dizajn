@@ -2,6 +2,8 @@ let firebaseUrl="https://web-projekat-602fa-default-rtdb.firebaseio.com";
 let autori={};
 let knjige={};
 let autor={};
+let prosjek=0;
+let br=0;
 let br_slike=0;
 
 const slika_con=document.getElementById("slika");
@@ -12,10 +14,30 @@ async function preuzmi_autora(){
     autor =await odg.json() || {};
     const odg2=await fetch(firebaseUrl+'/knjige.json?orderBy="idAutora"&equalTo="'+autor_id+'"');
     knjige=await odg2.json() || {};
-    console.log(odg2.status);
+    const odg3=await fetch(firebaseUrl+'/ocene.json')
+    let sve_ocene=await odg3.json() || {};
+    
+    prosjek=0
+    br=0
+    for(let kljuc in sve_ocene){
+        let tren_ocjena=sve_ocene[kljuc];
+
+        if(tren_ocjena && tren_ocjena.idAutora === autor_id){
+            prosjek=prosjek+tren_ocjena.vrednost;
+            br++;
+        }
+    }
+    if (br > 0) {
+        prosjek = (prosjek / br).toFixed(1);
+    } else {
+        prosjek = 0;
+    }
+
+    console.log(prosjek);
+    /* console.log(odg2.status);
 console.log(knjige);
+    console.log(typeof minus); */
     prikazi_autora();
-    console.log(typeof minus);
 }
 function prikazi_autora(){
     const ime_con=document.getElementById("ime");
@@ -32,7 +54,8 @@ function prikazi_autora(){
     primjerci_con.innerHTML=`Број продатих примјеара: ${autor.brojProdatihPrimeraka}`;
     const kontakt_con=document.getElementById("kontakt");
     kontakt_con.innerHTML=`Контакт: ${autor.kontaktTelefonMenadzera}`;
-
+    const prosjek_con=document.getElementById("prosjek")
+    prosjek_con.innerHTML=`Просечна оцена: ${prosjek} `
     let slike=autor.slike||[];
     console.log(autor.slike);
     ucitaj_sliku();
@@ -72,5 +95,46 @@ function plus(){
     console.log("dodat, br slike"+br_slike);
     ucitaj_sliku();
 }
+async function oceni(ocenaVrednost) {
+    const parametri = new URLSearchParams(window.location.search);
+    let autor_id = parametri.get("id");
+    
+    // 1. Визуелно бојење звезда у интерфејсу
+    const sveZvezde = document.querySelectorAll('.zvijezde .fa-star');
+    
+    sveZvezde.forEach(zvezda => {
+        let vrednostZvezde = parseInt(zvezda.getAttribute('data-value'));
+        
+        if (vrednostZvezde <= ocenaVrednost) {
+            zvezda.classList.add('popunjena_zvijezda');
+        } else {
+            zvezda.classList.remove('popunjena_zvijezda');
+        }
+    });
+/* 
+    // 2. Спремање новог објекта оцене у Firebase
+    let novaOcena = {
+        datum: new Date().toISOString().split('T')[0], // Уписује данашњи датум у формату ГГГГ-ММ-ДД
+        idAutora: autor_id,
+        idKorisnika: "kor001", 
+        vrednost: ocenaVrednost
+    };
 
+    try {
+        const odg = await fetch(firebaseUrl + '/ocene.json', {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(novaOcena)
+        });
+
+        if (odg.ok) {
+            alert("Успешно сте оценили аутора оценом " + ocenaVrednost);
+            preuzmi_autora(); 
+        }
+    } catch (greska) {
+        console.error("Грешка при упису оцене:", greska);
+    } */
+}
 document.addEventListener("DOMContentLoaded",preuzmi_autora);

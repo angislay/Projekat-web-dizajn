@@ -23,9 +23,11 @@ button{
         }        
 }
 section{
+        justify-content: start;
     width: 90%;
     height: 70vh;
     overflow-y: auto;
+        overflow-x: hidden;
     flex-wrap: nowrap;
     border: solid 1px var(--border_color);
     border-radius: 1rem;  
