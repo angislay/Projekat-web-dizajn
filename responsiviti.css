@@ -1,0 +1,108 @@
+/* ================================
+   RESPONSIVITI.CSS
+   Ukljuci ovo na svakoj stranici:
+   <link rel="stylesheet" href="responsiviti.css">
+   ================================ */
+
+/* Hamburger dugme — sakriveno na desktopu */
+.hamburger_dugme {
+    display: none;
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    font-size: 1.4rem;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* ================================
+   MOBILNI (do 700px)
+   ================================ */
+@media screen and (max-width: 700px) {
+
+    /* Ponisti crvenu pozadinu iz kostur_css.css */
+    body {
+        background-color: var(--background_color);
+    }
+
+    /* Navbar ostaje fiksiran, reorganizuje se u dva reda */
+    .navbar {
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: auto;
+        min-height: 60px;
+        padding: 10px 15px;
+        gap: 10px;
+    }
+
+    /* Nav-left — login i hamburger u jedan red */
+    .nav-left {
+        flex: 1;
+        justify-content: flex-start;
+        gap: 12px;
+    }
+
+    /* Nav-right — logo ostaje desno */
+    .nav-right {
+        flex-shrink: 0;
+    }
+
+    /* Hamburger se prikazuje */
+    .hamburger_dugme {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Linkovi — sakriveni, razvlace se ispod navbara kao padajuci meni */
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        order: 3;
+        background-color: var(--background_color_nav);
+        padding: 5px 0 10px 0;
+        gap: 0;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform 300ms ease;
+    }
+
+    /* Kad je otvoren */
+    .nav-links.otvoren {
+        display: flex;
+        transform: scaleY(1);
+    }
+
+    /* Svaki link zauzima celu sirinu */
+    .nav-links li {
+        list-style: none;
+        width: 100%;
+    }
+
+    .nav-links li a {
+        display: block;
+        padding: 12px 20px;
+        font-size: 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        transition: background-color 200ms ease;
+    }
+
+    .nav-links li a:hover {
+        background-color: var(--background_color_nav_hover);
+    }
+
+    /* Logo manji na mobilnom */
+    .logo {
+        font-size: 1.1rem;
+    }
+
+    /* Main — manji padding */
+    main {
+        padding: 80px 20px 20px 20px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
