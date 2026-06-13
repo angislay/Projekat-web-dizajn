@@ -5,10 +5,6 @@ function uzmiIdIzUrl() {
     return new URLSearchParams(window.location.search).get("id");
 }
 
-// ========================
-//  UČITAVANJE KNJIGE
-// ========================
-
 async function ucitajPodatkeOKnjizi() {
     const idKnjige = uzmiIdIzUrl();
     if (!idKnjige) {
@@ -25,18 +21,15 @@ async function ucitajPodatkeOKnjizi() {
             return;
         }
 
-        // Osnovni podaci
         document.getElementById("knjiga-naslov").innerText = knjiga.naziv || "/";
         document.getElementById("knjiga-zanr").innerText = `Жанр: ${knjiga.zanr || "/"}`;
         document.getElementById("knjiga-isbn").innerText = `ISBN: ${knjiga.isbn || "/"}`;
         document.getElementById("knjiga-cena").innerText = `Цена: ${knjiga.cena ? knjiga.cena + " РСД" : "/"}`;
         document.getElementById("knjiga-opis").innerText = knjiga.opis || "Нема описа.";
 
-        // Slika
         const slikaUrl = (knjiga.slike && knjiga.slike.length > 0) ? knjiga.slike[0] : "";
         document.getElementById("knjiga-slika").src = slikaUrl;
 
-        // Autor — učitaj ime iz Firebase
         if (knjiga.idAutora) {
             ucitajAutora(knjiga.idAutora);
         }
@@ -50,9 +43,6 @@ async function ucitajPodatkeOKnjizi() {
     }
 }
 
-// ========================
-//  UČITAVANJE AUTORA
-// ========================
 
 async function ucitajAutora(idAutora) {
     try {
@@ -71,9 +61,7 @@ async function ucitajAutora(idAutora) {
     }
 }
 
-// ========================
-//  UČITAVANJE RECENZIJA
-// ========================
+
 
 async function ucitajRecenzije(idKnjige) {
     const kontejner = document.getElementById("komentari-kontejner");
@@ -92,7 +80,6 @@ async function ucitajRecenzije(idKnjige) {
             return;
         }
 
-        // Sortiraj od najnovije
         recenzijeKnjige.sort((a, b) => new Date(b.datum) - new Date(a.datum));
 
         kontejner.innerHTML = "";
@@ -121,9 +108,7 @@ function formatDatum(datum) {
     return d.toLocaleDateString("sr-Latn", { day: "2-digit", month: "2-digit", year: "numeric" });
 }
 
-// ========================
-//  SLANJE RECENZIJE
-// ========================
+
 
 function inicijalizujFormuRecenzije() {
     const dugme = document.getElementById("btn-posalji-recenziju");
@@ -139,7 +124,6 @@ function inicijalizujFormuRecenzije() {
             return;
         }
 
-        // Za DZ2 — validacija prolazi, upis u Firebase za finalnu odbranu
         prikaziPorukulokalno(poruka, "✅ Рецензија је валидирана. Упис у базу се ради на финалној одбрани.", "uspeh");
         document.getElementById("recenzija-tekst").value = "";
     });
@@ -152,9 +136,7 @@ function prikaziPorukulokalno(el, tekst, tip) {
     setTimeout(() => { el.textContent = ""; el.className = "recenzija-poruka"; }, 4000);
 }
 
-// ========================
-//  INIT
-// ========================
+
 
 document.addEventListener("DOMContentLoaded", () => {
     ucitajPodatkeOKnjizi();

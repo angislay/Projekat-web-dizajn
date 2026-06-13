@@ -195,7 +195,7 @@ body{
     box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
 }
 /* ================================
-   RESPONZIVNOST — katalog knjiga
+   resp resp resp
    ================================ */
 
 /* TABLET (do 900px) */
@@ -242,7 +242,6 @@ body{
         display: block;
     }
 
-    /* Pretraga — slaže se vertikalno */
     .pretraga-kontejner {
         flex-direction: column;
         align-items: stretch;
@@ -265,7 +264,6 @@ body{
         text-align: center;
     }
 
-    /* Grid — jedna kolona */
     .grid-kontejner {
         grid-template-columns: 1fr;
         padding: 10px;

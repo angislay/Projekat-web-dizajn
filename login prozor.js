@@ -1,6 +1,4 @@
-// ========================
-//  LOGIN MODAL
-// ========================
+
 
 const firebaseUrlLogin = "https://web-projekat-602fa-default-rtdb.firebaseio.com";
 
@@ -15,10 +13,21 @@ function zatvoriLoginModal() {
 }
 
 function loginPrikaziTab(tab) {
-    document.getElementById("sekcija-prijava").style.display = tab === "prijava" ? "block" : "none";
-    document.getElementById("sekcija-registracija").style.display = tab === "registracija" ? "block" : "none";
-    document.getElementById("tab-prijava").classList.toggle("aktivan", tab === "prijava");
-    document.getElementById("tab-registracija").classList.toggle("aktivan", tab === "registracija");
+    if (tab === "prijava") {
+        document.getElementById("sekcija-prijava").style.display = "block";
+        document.getElementById("tab-prijava").classList.add("aktivan");
+    } else {
+        document.getElementById("sekcija-prijava").style.display = "none";
+        document.getElementById("tab-prijava").classList.remove("aktivan");
+    }
+
+    if (tab === "registracija") {
+        document.getElementById("sekcija-registracija").style.display = "block";
+        document.getElementById("tab-registracija").classList.add("aktivan");
+    } else {
+        document.getElementById("sekcija-registracija").style.display = "none";
+        document.getElementById("tab-registracija").classList.remove("aktivan");
+    }
 }
 
 function ocistiLoginFormu() {
@@ -37,9 +46,7 @@ function ocistiLoginFormu() {
     });
 }
 
-// ========================
-//  PRIJAVA
-// ========================
+///prijava korisnika
 
 async function prijaviKorisnika() {
     const korisnickoIme = document.getElementById("prijava-korisnicko-ime").value.trim();
@@ -88,7 +95,7 @@ async function prijaviKorisnika() {
 }
 
 // ========================
-//  REGISTRACIJA
+//  Registracijaaaaa
 // ========================
 
 async function registrujKorisnika() {
@@ -101,7 +108,6 @@ async function registrujKorisnika() {
     const adresa = document.getElementById("reg-adresa").value.trim();
     const zanimanje = document.getElementById("reg-zanimanje").value.trim();
 
-    // Resetuj greske
     ["gr-reg-ime","gr-reg-prezime","gr-reg-korisnicko","gr-reg-email",
      "gr-reg-lozinka","gr-reg-datum","gr-reg-adresa","gr-reg-opsta"].forEach(id => {
         document.getElementById(id).textContent = "";
@@ -121,12 +127,11 @@ async function registrujKorisnika() {
     if (!adresa)        { document.getElementById("gr-reg-adresa").textContent = "Обавезно поље"; ok = false; }
     if (!ok) return;
 
-    // Za DZ2 — validacija prolazi, upis u Firebase za finalnu odbranu
     document.getElementById("uspeh-registracija").textContent = "✅ Регистрација валидирана. Упис у базу се ради на финалној одбрани.";
 }
 
 // ========================
-//  DUGME PRIJAVE — UPDATE
+//  dugme prijave i odjave
 // ========================
 
 function azurirajDugmePrijave(korisnik) {
@@ -146,17 +151,13 @@ function odjavaKorisnika() {
     });
 }
 
-// ========================
-//  INIT — povezi dugmad i pozadinu
-// ========================
+
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Klik na pozadinu zatvara modal
     document.getElementById("login-modal").addEventListener("click", function(e) {
         if (e.target === this) zatvoriLoginModal();
     });
 
-    // Povezi sva dugmad "Пријава"
     document.querySelectorAll(".login-btn").forEach(btn => {
         if (btn.textContent.trim() === "Пријава") {
             btn.dataset.loginBtn = "true";
@@ -164,7 +165,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Ako je vec prijavljen, azuriraj dugme
     const sacuvan = localStorage.getItem("prijavljeniKorisnik");
     if (sacuvan) {
         azurirajDugmePrijave(JSON.parse(sacuvan));

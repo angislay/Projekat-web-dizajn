@@ -1,10 +1,5 @@
-/* ================================
-   RESPONSIVITI.CSS
-   Ukljuci ovo na svakoj stranici:
-   <link rel="stylesheet" href="responsiviti.css">
-   ================================ */
 
-/* Hamburger dugme — sakriveno na desktopu */
+
 .hamburger_dugme {
     display: none;
     background: transparent;
@@ -17,17 +12,13 @@
     line-height: 1;
 }
 
-/* ================================
-   MOBILNI (do 700px)
-   ================================ */
+
 @media screen and (max-width: 700px) {
 
-    /* Ponisti crvenu pozadinu iz kostur_css.css */
     body {
         background-color: var(--background_color);
     }
 
-    /* Navbar ostaje fiksiran, reorganizuje se u dva reda */
     .navbar {
         flex-direction: row;
         flex-wrap: wrap;
@@ -37,26 +28,23 @@
         gap: 10px;
     }
 
-    /* Nav-left — login i hamburger u jedan red */
     .nav-left {
         flex: 1;
         justify-content: flex-start;
         gap: 12px;
     }
 
-    /* Nav-right — logo ostaje desno */
     .nav-right {
         flex-shrink: 0;
     }
 
-    /* Hamburger se prikazuje */
     .hamburger_dugme {
         display: inline-flex;
         align-items: center;
         justify-content: center;
     }
 
-    /* Linkovi — sakriveni, razvlace se ispod navbara kao padajuci meni */
+   
     .nav-links {
         display: none;
         flex-direction: column;
@@ -70,13 +58,11 @@
         transition: transform 300ms ease;
     }
 
-    /* Kad je otvoren */
     .nav-links.otvoren {
         display: flex;
         transform: scaleY(1);
     }
 
-    /* Svaki link zauzima celu sirinu */
     .nav-links li {
         list-style: none;
         width: 100%;
@@ -94,12 +80,11 @@
         background-color: var(--background_color_nav_hover);
     }
 
-    /* Logo manji na mobilnom */
     .logo {
         font-size: 1.1rem;
     }
 
-    /* Main — manji padding */
+    
     main {
         padding: 80px 20px 20px 20px;
         width: 100%;

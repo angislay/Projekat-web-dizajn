@@ -1,4 +1,4 @@
-/* Dodatak za formu knjiga */
+
 select {
     width: 100%;
     padding: 10px;
@@ -9,7 +9,6 @@ select {
     font-size: 1rem;
 }
 
-/* NASLOV SEKCIJE */
 .admin-header {
     display: flex;
     justify-content: space-between;
@@ -21,7 +20,7 @@ select {
     color: #5a189a;
 }
 
-/* TABELA */
+/* za tabelu */
 .tabela-kontejner {
     margin: 20px;
     background: white;
@@ -59,7 +58,7 @@ tbody tr:hover {
     background-color: #f3e8ff;
 }
 
-/* DUGMAD — opšte */
+
 button {
     cursor: pointer;
     border: none;
@@ -69,7 +68,6 @@ button {
     transition: 0.2s;
 }
 
-/* AKCIJSKA ĆELIJA — dugmad jedno ispod drugog, iste veličine */
 .akcije {
     display: flex;
     flex-direction: column;
@@ -78,7 +76,6 @@ button {
     min-width: 90px;
 }
 
-/* IZMENI */
 .btn-izmeni {
     background-color: #9d4edd;
     color: white;
@@ -90,7 +87,6 @@ button {
     background-color: #7b2cbf;
 }
 
-/* OBRISI */
 .btn-obrisi {
     background-color: #e63946;
     color: white;
@@ -206,7 +202,7 @@ button {
 }
 
 /* ================================
-   RESPONZIVNOST — admin knjige
+   responsivityyyy
    ================================ */
 
 /* TABLET (do 900px) */
@@ -248,14 +244,12 @@ button {
         display: block;
     }
 
-    /* Admin header — naslov i dugme jedno ispod drugog */
     .admin-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
     }
 
-    /* Tabela — horizontalni scroll */
     .tabela-kontejner {
         margin: 10px;
         overflow-x: auto;
@@ -279,9 +273,6 @@ button {
         width: 100%;
     }
 }
-/* ========================
-   MODAL ZA FORMU KNJIGE
-   ======================== */
 
 .modal-pozadina {
     display: none;

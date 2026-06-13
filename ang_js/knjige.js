@@ -100,7 +100,6 @@ function pretraziKnjige() {
 document.addEventListener("DOMContentLoaded", () => {
     preuzmiKnjigeKatalog();
 
-    // Reset dugme - SADA JE BEZBEDNO OVDE UNUTRA
     const btnReset = document.getElementById("btn-reset");
     if (btnReset) {
         btnReset.addEventListener("click", function() {

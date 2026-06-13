@@ -63,9 +63,7 @@ function prikaziTabelu() {
 });
 }
 
-// ========================
-//  SELECT ZA AUTORE
-// ========================
+
 
 function popuniSelectAutora() {
     const sel = document.getElementById("autor_knjige");
@@ -79,9 +77,7 @@ function popuniSelectAutora() {
     });
 }
 
-// ========================
-//  MODAL — OTVARANJE/ZATVARANJE
-// ========================
+
 
 function otvoriFormu(rezim) {
     trenutniRezim = rezim;
@@ -133,7 +129,6 @@ function zatvoriFormu() {
     trenutniIdKnjige = null;
 }
 
-// Zatvaranje klikom na pozadinu
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("modal-knjiga").addEventListener("click", function(e) {
         if (e.target === this) zatvoriFormu();
@@ -153,9 +148,6 @@ function ocistiFormu() {
         document.getElementById("autor_knjige").selectedIndex = 0;
 }
 
-// ========================
-//  VALIDACIJA
-// ========================
 
 function validanISBN(vrednost) {
     const samoCifre = vrednost.replace(/-/g, "");
@@ -210,9 +202,7 @@ function validirajFormu() {
     return ispravno;
 }
 
-// ========================
-//  ČUVANJE
-// ========================
+
 
 function sacuvajKnjigu() {
     if (!validirajFormu()) return;
@@ -258,9 +248,6 @@ function prikaziPoruku(tekst) {
     setTimeout(() => { poruka.textContent = ""; }, 4000);
 }
 
-// ========================
-//  BRISANJE
-// ========================
 
 function otvoriBrisanje(id) {
     idZaBrisanje = id;
@@ -282,9 +269,7 @@ function potvrdiObrisanje() {
     prikaziPoruku("✅ Књига је обрисана (локално).");
 }
 
-// ========================
-//  INIT
-// ========================
+
 
 document.addEventListener("DOMContentLoaded", async () => {
     await ucitajAutore();
