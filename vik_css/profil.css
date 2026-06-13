@@ -68,6 +68,8 @@ span{
     flex-direction: row;
     justify-content: space-between;
     width: 80%;
+    height: 3rem;
+    border-bottom: solid 1px var(--font_color);
 }
 .tab.aktivan{
     display: flex;
@@ -86,5 +88,8 @@ span{
         box-sizing: border-box;
         width: 85%;
         margin: 0.5rem;
+    }
+    .ocjena{
+        flex-direction: column;
     }
 }
