@@ -62,6 +62,7 @@ span{
     width: 100%;
     justify-content: start;
     flex-direction: column;
+    flex-wrap: nowrap;
 }
 .ocjena{
     flex-direction: row;
