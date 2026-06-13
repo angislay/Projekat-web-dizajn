@@ -1,103 +1,85 @@
-main{
-    display: flex;
-    height: 80vh;
-    width: 100vw;
-    margin-top: 110px;
-    padding: 0px;
-    flex-direction: row;
-    /* justify-content:stretch; */
+/* ==========================================================================
+   STILOVI ZA UOKVIRENE RECENZIJE - SVETLOLJUBIČASTA POZADINA
+   ========================================================================== */
 
+/* Kada su recenzije aktivne, obavezno koriste flexbox raspored */
+.recenzije.tab.aktivan {
+    display: flex !important;
 }
-aside{
-    width: 20%;
-    padding: 10px;
-    height: 100%;
-    background-color: var(--background_color_naslov);
+
+/* Kontejner u kom se ređaju recenzije */
+.recenzije.tab {
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    background-color: var(--background_color_nav); /* Vraća se na tvoju originalnu pozadinu taba */
 }
-.sadrzaj{
-    padding: 10px;
+
+/* Potpuno uokvirena pojedinačna kartica recenzije sa svetloljubičastom pozadinom */
+.recenzija {
+    background-color: #f3e8ff; /* Fina, svetloljubičasta pozadina kartice */
+    border: 1px solid #d8b4fe; /* Jasan ljubičasti okvir oko cele kartice */
+    border-top: 4px solid #7b2cbf; /* Tamnija ljubičasta traka na vrhu okvira */
+    border-radius: 10px; /* Zaobljene ivice okvira */
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    flex: 1;
-}
-.tabovi{
-    height: min-content;
-}
-.tab{
-    background-color: var(--background_color_nav);
-    flex:1;
+    gap: 12px;
+    box-shadow: 0 4px 6px rgba(123, 44, 191, 0.05); /* Suptilna senka sa tonovima ljubičaste */
+    transition: all 0.25s ease-in-out;
     width: 100%;
-    display:none;
-    overflow:auto;
-}
-.tab.aktivan{
-    display: block;
-}
-.tabovi button{
-       padding: 6px 10px;
-    background-color: #7b2cbf;
-    color: var(--font_color);
-    border: none;
-    border-radius: 8px 8px 0px 0px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
-    &:hover{
-        background-color: var(--border_color_hover);
-    }
-}
-.ocjena{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    padding: 10px 0px;
-}
-.popunjena_zvijezda{
-    color: orange;
-}
-.recenzije {
-    padding: 10px;
+    box-sizing: border-box;
 }
 
-.recenzija {
-    background: linear-gradient(135deg, #9d4edd, #7b2cbf);
-    color: white;
-    border-radius: 15px;
-    padding: 15px 20px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
+/* Efekat kada se mišem pređe preko uokvirene kartice */
 .recenzija:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+    transform: translateY(-4px); /* Kartica se blago podigne */
+    background-color: #edd8ff; /* Blago se pojača svetloljubičasta boja na hover */
+    border-color: #7b2cbf; /* Okvir postaje tamnije ljubičast na hover */
+    box-shadow: 0 8px 16px rgba(123, 44, 191, 0.15); /* Senka postaje dublja */
 }
 
+/* Naslov knjige unutar okvira */
 .recenzija h3 {
-    margin: 0 0 8px 0;
-    font-size: 18px;
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #3b0764; /* Veoma tamna ljubičasta za maksimalan kontrast i čitljivost */
+    border-bottom: 1px solid #e9d5ff; /* Linija koja odvaja naslov od teksta */
+    padding-bottom: 8px;
 }
 
-.recenzija a {
+/* Link unutar naslova */
+.recenzija h3 a {
+    color: #7b2cbf;
     text-decoration: none;
-    color: #ffd6ff;
-    font-weight: bold;
+    transition: color 0.2s ease;
 }
 
-.recenzija a:hover {
+.recenzija h3 a:hover {
+    color: #5a189a;
     text-decoration: underline;
 }
 
+/* Sam tekst recenzije */
 .recenzija p {
     margin: 0;
-    font-size: 14px;
-    line-height: 1.5;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #4a044e; /* Tamna nijansa prilagođena ljubičastoj pozadini */
+    word-break: break-word;
+    white-space: normal;
 }
 
+/* Donji deo kartice sa datumom */
 .recenzija .meta {
-    font-size: 12px;
-    opacity: 0.8;
-    margin-top: 8px;
+    font-size: 0.85rem;
+    color: #6b21a8; /* Prilagođena ljubičasta boja za datum */
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
 }

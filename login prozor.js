@@ -79,7 +79,7 @@ async function prijaviKorisnika() {
 
         document.getElementById("uspeh-prijava").textContent = `✅ Добродошли, ${korisnik.ime}!`;
         azurirajDugmePrijave(korisnik);
-
+        window.location.href = "profil.html";
         setTimeout(() => zatvoriLoginModal(), 1200);
 
     } catch (e) {

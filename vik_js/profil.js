@@ -3,6 +3,8 @@ let prijavljeniKorisnikId = null;
 let prijavljeniKorisnik = null;
 let ocjene=[]
 let autori={}
+let knjige = {};
+let recenzije = [];
 // 3. Провера да ли је корисник уопште улогован
 if (prijavljeniKorisnik) {
     console.log("Улогован је корисник:", prijavljeniKorisnik.ime);
@@ -39,8 +41,23 @@ async function preuzmi_podatke() {
             }
         }   
         console.log(ocjene)
+        const odgKnjige = await fetch(firebaseUrl + "/knjige.json");
+knjige = await odgKnjige.json() || {};
+
+const odgRecenzije = await fetch(firebaseUrl + "/recenzije.json");
+const sveRecenzije = await odgRecenzije.json() || {};
+
+recenzije = [];
+for (let kljuc in sveRecenzije) {
+    let rec = sveRecenzije[kljuc];
+    if (rec.idKorisnika === prijavljeniKorisnikId) {
+        recenzije.push(rec);
+    }
+}
+recenzije.sort((a, b) => new Date(b.datum) - new Date(a.datum));
         upisi_podatke()    
         upisi_ocjene()
+        upisi_recenzije()
     }
 }
 function upisi_podatke(){
@@ -89,3 +106,29 @@ window.addEventListener("storage", function(e) {
         location.reload(); // Освежава страницу чим се промени ID корисника
     }
 });
+function upisi_recenzije() {
+    const div = document.querySelector(".recenzije.tab");
+
+    if (recenzije.length === 0) {
+        div.innerHTML = `<div style="padding:1rem; font-style:italic; opacity:0.7;">Нисте написали ниједну рецензију.</div>`;
+        return;
+    }
+
+    let html = "";
+    recenzije.forEach(rec => {
+        const knjiga = knjige[rec.idKnjige];
+        const naslov = knjiga ? knjiga.naziv : rec.idKnjige;
+        const datum = new Date(rec.datum).toLocaleDateString("sr-Latn", {
+            day: "2-digit", month: "2-digit", year: "numeric"
+        });
+
+        html += `
+            <div class="recenzija">
+                <h3><a href="knjiga detaljno.html?id=${rec.idKnjige}">${naslov}</a></h3>
+                <p>${rec.tekst}</p>
+                <p class="meta">📅 ${datum}</p>
+            </div>`;
+    });
+
+    div.innerHTML = html;
+}
