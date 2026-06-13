@@ -1,0 +1,185 @@
+/* ========================
+   LOGIN / REGISTRACIJA MODAL
+   ======================== */
+
+.login-modal-pozadina {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-modal-prozor {
+        flex-wrap: nowrap;
+    background-color: var(--background_color_naslov);
+    color: var(--font_color);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 550px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    padding-bottom: 30px;
+}
+
+/* TABOVI */
+.login-tabovi {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 2px solid var(--border_color);
+    padding: 0 20px;
+    gap: 5px;
+    position: relative;
+}
+
+.login-tab {
+    background: transparent;
+    border: none;
+    color: var(--font_color);
+    font-size: 1rem;
+    padding: 15px 20px;
+    cursor: pointer;
+    opacity: 0.6;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    border-radius: 0;
+    transition: 300ms;
+}
+
+.login-tab.aktivan {
+    opacity: 1;
+    border-bottom: 3px solid var(--border_color_hover);
+    color: var(--font_color);
+}
+
+.login-tab:hover {
+    opacity: 1;
+    background: transparent;
+}
+
+.login-modal-zatvori {
+    margin-left: auto;
+    background: transparent;
+    border: none;
+    color: var(--font_color);
+    font-size: 1.3rem;
+    cursor: pointer;
+    opacity: 0.7;
+    padding: 5px 10px;
+    border-radius: 50%;
+    transition: 300ms;
+}
+
+.login-modal-zatvori:hover {
+    opacity: 1;
+    background: rgba(255,255,255,0.1);
+}
+
+/* SEKCIJE */
+.login-sekcija {
+    padding: 20px 30px 10px 30px;
+}
+
+.login-sekcija h3 {
+    margin: 0 0 20px 0;
+    font-size: 1.2rem;
+    color: var(--font_color);
+    opacity: 0.9;
+}
+
+/* RED SA DVA POLJA */
+.login-red {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.login-red .login-unos {
+    flex: 1;
+}
+
+/* POLJE */
+.login-unos {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 14px;
+}
+
+.login-unos label {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    opacity: 0.85;
+}
+
+.login-unos input {
+    background-color: var(--background_color_nav);
+    color: var(--font_color);
+    border: 1px solid var(--border_color);
+    border-radius: 8px;
+    padding: 9px 12px;
+    font-size: 0.95rem;
+    transition: 300ms;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.login-unos input:focus {
+    border-color: var(--border_color_hover);
+    outline: none;
+    background-color: var(--background_transparent_black_focus);
+}
+
+/* GRESKE I USPEH */
+.login-greska {
+    color: #e63946;
+    font-size: 0.8rem;
+    margin-top: 3px;
+    min-height: 1rem;
+}
+
+.login-uspeh {
+    color: #4caf50;
+    font-size: 0.9rem;
+    margin: 8px 0;
+}
+
+/* SUBMIT DUGME */
+.login-submit-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background: linear-gradient(135deg, var(--border_color), #5a189a);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 300ms;
+}
+
+.login-submit-btn:hover {
+    background: linear-gradient(135deg, var(--border_color_hover), var(--border_color));
+    box-shadow: 0 0 15px var(--box_shadow);
+}
+
+/* MOBILNI */
+@media screen and (max-width: 600px) {
+    .login-red {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .login-sekcija {
+        padding: 15px 20px;
+    }
+
+    .login-modal-prozor {
+        max-height: 95vh;
+    }
+}

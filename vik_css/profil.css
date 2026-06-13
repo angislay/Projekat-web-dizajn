@@ -22,7 +22,12 @@ aside{
     /* width: clamp(1rem,15vw,20rem); */
         overflow-wrap: anywhere; 
     word-break: break-word;
+    align-items: stretch;
 
+}
+span{
+    margin-bottom: 0.2rem;
+    align-items: start; 
 }
 .sadrzaj{
     justify-content: start;
@@ -56,6 +61,12 @@ aside{
     height: 100%;
     width: 100%;
     justify-content: start;
+    flex-direction: column;
+}
+.ocjena{
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
 }
 .tab.aktivan{
     display: flex;
