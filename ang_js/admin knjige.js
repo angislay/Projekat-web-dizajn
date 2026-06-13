@@ -6,9 +6,7 @@ let trenutniRezim = "dodaj";
 let trenutniIdKnjige = null;
 let idZaBrisanje = null;
 
-// ========================
-//  UČITAVANJE PODATAKA
-// ========================
+//ucitavanje podataka iz baze
 
 async function ucitajKnjige() {
     try {
@@ -32,9 +30,7 @@ async function ucitajAutore() {
     }
 }
 
-// ========================
-//  TABELA
-// ========================
+// stvari za tabelu 
 
 function prikaziTabelu() {
     const telo = document.getElementById("tabela-telo");
@@ -46,25 +42,25 @@ function prikaziTabelu() {
         return;
     }
 
-    kljucevi.forEach(id => {
-        const k = sveKnjige[id];
-        const autor = sviAutori[k.idAutora]
-            ? `${sviAutori[k.idAutora].ime} ${sviAutori[k.idAutora].prezime}`
-            : k.idAutora || "/";
+    kljucevi.forEach(function(id) {
+    const k = sveKnjige[id];
+    const autor = sviAutori[k.idAutora]
+        ? `${sviAutori[k.idAutora].ime} ${sviAutori[k.idAutora].prezime}`
+        : k.idAutora || "/";
 
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-            <td>${k.naziv || "/"}</td>
-            <td>${autor}</td>
-            <td>${k.zanr || "/"}</td>
-            <td>${k.cena ? k.cena + " РСД" : "/"}</td>
-            <td>${k.isbn || "/"}</td>
-            <td class="akcije">
-                <button class="btn-izmeni" onclick="otvoriFormuZaIzmenu('${id}')">Измени</button>
-                <button class="btn-obrisi" onclick="otvoriBrisanje('${id}')">Обриши</button>
-            </td>`;
-        telo.appendChild(tr);
-    });
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+        <td>${k.naziv || "/"}</td>
+        <td>${autor}</td>
+        <td>${k.zanr || "/"}</td>
+        <td>${k.cena ? k.cena + " РСД" : "/"}</td>
+        <td>${k.isbn || "/"}</td>
+        <td class="akcije">
+            <button class="btn-izmeni" onclick="otvoriFormuZaIzmenu('${id}')">Измени</button>
+            <button class="btn-obrisi" onclick="otvoriBrisanje('${id}')">Обриши</button>
+        </td>`;
+    telo.appendChild(tr);
+});
 }
 
 // ========================
