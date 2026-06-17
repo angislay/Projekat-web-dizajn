@@ -5,6 +5,7 @@ const prozor=document.querySelector(".izmjena");
 
 
 async function preuzmi_autore(){
+    autori = {};
     const odg=await fetch(firebaseUrl+"/autori.json");
     autori=await odg.json() || {};
     listaj_autore();
@@ -47,7 +48,7 @@ function listaj_autore(){
                 
                 <div class="dugmad">
                     <button onclick="pop_up('${autor_id}')">Измени</button>
-                    <button id="brisanje">Обриши</button>
+                    <button onclick="potvrda_brisanja('${autor_id}')" >Обриши</button>
                 </div>
             </div>`;
     }
@@ -206,7 +207,7 @@ document.querySelector(".izmjena").addEventListener("submit",async function(e){
                 },
                 body: JSON.stringify(izmenjeniAutor)
             });
-            
+
             if (odg.ok) {
                 prozor.classList.remove("open"); // Затварамо поп-уп прозор
                 preuzmi_autore(); // Освежавамо листу аутора на страници
@@ -220,5 +221,75 @@ document.querySelector(".izmjena").addEventListener("submit",async function(e){
     }
 
 });
+function potvrda_brisanja(autor_id) {
+    trenutni_autor_id = autor_id;
+    
+    const prozorBrisanje = document.getElementById("prozor_brisanje");
+    prozorBrisanje.classList.add("open");
+}
 
+function zatvori_prozor_brisanje() {
+    const prozorBrisanje = document.getElementById("prozor_brisanje");
+    prozorBrisanje.classList.remove("open");
+    trenutni_autor_id = null; 
+}
+document.getElementById("potvrdi_brisanje_dugme").addEventListener("click", async function() {
+    if (trenutni_autor_id) {
+        try {
+            // 1. ЧИШЋЕЊЕ КЊИГА (Идемо једну по једну и чекамо одговор)
+            const odgKnjige = await fetch(`${firebaseUrl}/knjige.json`);
+            const knjige = await odgKnjige.json() || {};
+
+            for (let knjiga_id in knjige) {
+                let knjiga = knjige[knjiga_id];
+                
+                if (knjiga.idAutora === trenutni_autor_id) {
+                    console.log(`Чистим референцу аутора у књизи: ${knjiga_id}`);
+                    
+                    // Овде користимо await, што значи да се чека Firebase пре следећег круга петље
+                    await fetch(`${firebaseUrl}/knjige/${knjiga_id}.json`, {
+                        method: "PATCH",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ idAutora: null })
+                    });
+                }
+            }
+
+            // 2. БРИСАЊЕ ОЦЕНА (Идемо једну по једну и чекамо одговор)
+            const odgOcene = await fetch(`${firebaseUrl}/ocene.json`);
+            const ocene = await odgOcene.json() || {};
+
+            for (let ocena_id in ocene) {
+                let ocena = ocene[ocena_id];
+                
+                if (ocena.idAutora === trenutni_autor_id) {
+                    console.log(`Бришем оцену за аутора: ${ocena_id}`);
+                    
+                    // Поново користимо await за брисање ове конкретне оцене
+                    await fetch(`${firebaseUrl}/ocene/${ocena_id}.json`, {
+                        method: "DELETE"
+                    });
+                }
+            }
+
+            // 3. БРИСАЊЕ САМОГ АУТОРА НА КРАЈУ (Тек када је све горе завршено)
+            const odg = await fetch(`${firebaseUrl}/autori/${trenutni_autor_id}.json`, {
+                method: "DELETE"
+            });
+
+            if (odg.ok) {
+                console.log("Аутор, оцене и књиге су успешно редом обрисани!");
+                zatvori_prozor_brisanje();
+                preuzmi_autore(); 
+            } else {
+                console.log("Грешка при брисању аутора са базе.");
+            }
+            
+        } catch (greska) {
+            console.error("Мрежна грешка при брисању:", greska);
+        }
+    }
+});
 document.addEventListener("DOMContentLoaded",preuzmi_autore);

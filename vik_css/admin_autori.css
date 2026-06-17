@@ -120,6 +120,17 @@ button:hover{
 .poruka span{
     color: red;
 }
+.bris{
+    background-color: var(--background_color_naslov);
+    margin: auto;
+    width: 40%;
+    padding: 1rem;
+    margin-top: 3rem;
+    border-radius: 1rem;
+    & .unos{
+        height: 1.5rem;
+    }
+}
 @media screen and (min-width: 601px) and (max-width: 1024px){
     .unos{
         /* margin: 0.5rem 0; */
