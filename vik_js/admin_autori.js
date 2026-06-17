@@ -1,7 +1,7 @@
 let firebaseUrl="https://web-projekat-602fa-default-rtdb.firebaseio.com";
 let autori={};
+let trenutni_autor_id = null;
 const prozor=document.querySelector(".izmjena");
-
 
 
 async function preuzmi_autore(){
@@ -12,6 +12,7 @@ async function preuzmi_autore(){
 function pop_up(autor_id){
     if(autor_id && autori[autor_id]){
         let autor=autori[autor_id];
+        trenutni_autor_id = autor_id;
         document.getElementById("unos_ime").value=autor.ime;
         document.getElementById("unos_prezime").value=autor.prezime;
         document.getElementById("unos_status").value=autor.status;
@@ -51,8 +52,26 @@ function listaj_autore(){
             </div>`;
     }
 }
+function forma_novi_autor() {
+    trenutni_autor_id = null;   
+    document.getElementById("unos_ime").value = "";
+    document.getElementById("unos_prezime").value = "";
+    document.getElementById("unos_status").value = "";
+    document.getElementById("unos_datum").value = "";
+    document.getElementById("unos_nagrade").value = "";
+    document.getElementById("unos_primjerci").value = "";
+    document.getElementById("unos_kontakt").value = "";
+    document.getElementById("unos_bio").value = "";
+    document.getElementById("unos_slike").value = "";
 
-document.querySelector(".izmjena").addEventListener("submit",function(e){
+    const poruke = document.querySelectorAll(".poruka span");
+    poruke.forEach(span => span.innerHTML = "");
+
+    prozor.querySelector("h3").innerHTML = "Додавање новог аутора:";
+
+    prozor.classList.add("open");
+}
+document.querySelector(".izmjena").addEventListener("submit",async function(e){
     e.preventDefault();/* sprecava refresovanje stranice */
 
     let tacan_unos=true;
@@ -131,10 +150,75 @@ document.querySelector(".izmjena").addEventListener("submit",function(e){
         }
     });
     if(tacan_unos){
-    alert("sve tacno");
-    prozor.classList.toggle("open");
-}
+        let slikeTekst = document.getElementById("unos_slike").value;
+        let dijelovi=slikeTekst.split(",");
+        let slikeNiz = [];
 
-})
+        for (let i = 0; i < dijelovi.length; i++) {
+            let url = dijelovi[i].trim();
+            
+            if (url !== "") {
+                slikeNiz.push(url);
+            }
+        }
+        let izmenjeniAutor = {
+            ime: document.getElementById("unos_ime").value.trim(),
+            prezime: document.getElementById("unos_prezime").value.trim(),
+            status: document.getElementById("unos_status").value.trim(),
+            datumRodjenja: document.getElementById("unos_datum").value,
+            brojOsvojenihNagrada: parseInt(document.getElementById("unos_nagrade").value),
+            brojProdatihPrimeraka: parseInt(document.getElementById("unos_primjerci").value),
+            kontaktTelefonMenadzera: document.getElementById("unos_kontakt").value.trim(),
+            biografija: document.getElementById("unos_bio").value.trim(),
+            slike: slikeNiz
+        };
+        let urlPutanja="";
+        if (trenutni_autor_id === null) {
+            let maxBroj = 0;
+            
+            for (let stari_id in autori) {
+                let brojSufiks = stari_id.replace("aut", ""); 
+                let broj = parseInt(brojSufiks);
+                
+                if (broj > maxBroj) {
+                    maxBroj = broj;
+                }
+            }
+            let noviBroj = maxBroj + 1; 
+            
+            // Форматирамо број тако да увек има три цифре (нпр. 7 постаје "007")
+            let noviSufiks = String(noviBroj).padStart(3, '0'); 
+            let novi_id = "aut" + noviSufiks;
+            
+            console.log("Генерисани нови кључ је:", novi_id);
+            urlPutanja = `${firebaseUrl}/autori/${novi_id}.json`;
+        }else {
+            
+            urlPutanja = `${firebaseUrl}/autori/${trenutni_autor_id}.json`;
+        }
+
+        try {
+            // Сада за СВЕ користимо PUT, јер PUT уписује податке тачно на путању коју му задамо
+            const odg = await fetch(urlPutanja, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(izmenjeniAutor)
+            });
+            
+            if (odg.ok) {
+                prozor.classList.remove("open"); // Затварамо поп-уп прозор
+                preuzmi_autore(); // Освежавамо листу аутора на страници
+            } else {
+                console.log("Greska u upisu novih pod");
+            }
+        } catch (greska) {
+            console.log("Problem povezivanja sa bazom");
+        }
+
+    }
+
+});
 
 document.addEventListener("DOMContentLoaded",preuzmi_autore);
