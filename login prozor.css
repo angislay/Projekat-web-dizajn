@@ -1,4 +1,6 @@
-
+/* ========================
+   LOGIN / REGISTRACIJA MODAL
+   ======================== */
 
 .login-modal-pozadina {
     display: none;
@@ -12,6 +14,7 @@
 }
 
 .login-modal-prozor {
+        flex-wrap: nowrap;
     background-color: var(--background_color_naslov);
     color: var(--font_color);
     border-radius: 20px;
@@ -23,7 +26,7 @@
     padding-bottom: 30px;
 }
 
-
+/* TABOVI */
 .login-tabovi {
     display: flex;
     flex-direction: row;
@@ -77,7 +80,7 @@
     background: rgba(255,255,255,0.1);
 }
 
-/*  */
+/* SEKCIJE */
 .login-sekcija {
     padding: 20px 30px 10px 30px;
 }
@@ -89,6 +92,7 @@
     opacity: 0.9;
 }
 
+/* RED SA DVA POLJA */
 .login-red {
     display: flex;
     flex-direction: row;
@@ -99,6 +103,7 @@
     flex: 1;
 }
 
+/* POLJE */
 .login-unos {
     display: flex;
     flex-direction: column;
@@ -129,6 +134,7 @@
     background-color: var(--background_transparent_black_focus);
 }
 
+/* GRESKE I USPEH */
 .login-greska {
     color: #e63946;
     font-size: 0.8rem;
@@ -142,6 +148,7 @@
     margin: 8px 0;
 }
 
+/* SUBMIT DUGME */
 .login-submit-btn {
     width: 100%;
     padding: 12px;
@@ -175,4 +182,50 @@
     .login-modal-prozor {
         max-height: 95vh;
     }
+}
+
+/* ========================
+   PADAJUĆI MENI ZA PRIJAVLJENOG KORISNIKA (Profil / Odjava)
+   ======================== */
+
+.korisnicki-meni-omotac {
+    position: relative;
+    display: inline-flex;
+}
+
+.korisnicki-meni {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 6px;
+    background-color: var(--background_color_naslov);
+    border: 1px solid var(--border_color);
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    z-index: 10001;
+    min-width: 160px;
+    overflow: hidden;
+    flex-direction: column;
+}
+
+.korisnicki-meni-stavka {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 16px;
+    background: transparent;
+    border: none;
+    color: var(--font_color);
+    text-align: left;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: 300ms;
+}
+
+.korisnicki-meni-stavka:hover {
+    background-color: var(--background_color_nav_hover);
+}
+
+.korisnicki-meni-odjava {
+    border-top: 1px solid var(--border_color);
 }

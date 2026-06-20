@@ -44,9 +44,12 @@ function prikaziTabelu() {
 
     kljucevi.forEach(function(id) {
     const k = sveKnjige[id];
-    const autor = sviAutori[k.idAutora]
-        ? `${sviAutori[k.idAutora].ime} ${sviAutori[k.idAutora].prezime}`
-        : k.idAutora || "/";
+    let autor;
+    if (k.idAutora && k.idAutora !== "nepoznat" && sviAutori[k.idAutora]) {
+        autor = `${sviAutori[k.idAutora].ime} ${sviAutori[k.idAutora].prezime}`;
+    } else {
+        autor = "Непознат аутор";
+    }
 
     const tr = document.createElement("tr");
     tr.innerHTML = `
@@ -68,6 +71,13 @@ function prikaziTabelu() {
 function popuniSelectAutora() {
     const sel = document.getElementById("autor_knjige");
     sel.innerHTML = "";
+
+    // opcija za slucaj da autor nije poznat / nije unet u bazu
+    const optNepoznat = document.createElement("option");
+    optNepoznat.value = "nepoznat";
+    optNepoznat.textContent = "Непознат аутор";
+    sel.appendChild(optNepoznat);
+
     Object.keys(sviAutori).forEach(id => {
         const a = sviAutori[id];
         const opt = document.createElement("option");
@@ -114,8 +124,13 @@ function otvoriFormuZaIzmenu(id) {
     }
 
     const autorSel = document.getElementById("autor_knjige");
+    let idAutoraZaSelekciju = k.idAutora;
+    const postojiAutor = Array.from(autorSel.options).some(opt => opt.value === idAutoraZaSelekciju);
+    if (!postojiAutor) {
+        idAutoraZaSelekciju = "nepoznat";
+    }
     for (let opt of autorSel.options) {
-        if (opt.value === k.idAutora) { opt.selected = true; break; }
+        if (opt.value === idAutoraZaSelekciju) { opt.selected = true; break; }
     }
 
     trenutniRezim = "izmeni";
@@ -127,6 +142,7 @@ function zatvoriFormu() {
     ocistiFormu();
     ocistiGreske();
     trenutniIdKnjige = null;
+    
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -159,7 +175,7 @@ function prikaziGresku(id, poruka) {
 }
 
 function ocistiGreske() {
-    ["gr-naslov", "gr-zanr", "gr-cena", "gr-strane", "gr-isbn"].forEach(id => {
+    ["gr-naslov", "gr-zanr", "gr-cena", "gr-strane", "gr-isbn","gr-checkbox"].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.textContent = "";
     });
@@ -204,7 +220,7 @@ function validirajFormu() {
 
 
 
-function sacuvajKnjigu() {
+async function sacuvajKnjigu() {
     if (!validirajFormu()) return;
 
     const novaKnjiga = {
@@ -222,17 +238,50 @@ function sacuvajKnjigu() {
             .filter(s => s !== "")
     };
 
+    let urlPutanja = "";
+
     if (trenutniRezim === "izmeni" && trenutniIdKnjige) {
-        sveKnjige[trenutniIdKnjige] = { ...sveKnjige[trenutniIdKnjige], ...novaKnjiga };
-        prikaziTabelu();
-        zatvoriFormu();
-        prikaziPoruku("✅ Измена је успешно сачувана (локално).");
+        // izmena postojece knjige - PUT na tacnu putanju
+        urlPutanja = `${firebaseUrl}/knjige/${trenutniIdKnjige}.json`;
     } else {
-        const noviId = "knj_novo_" + Date.now();
-        sveKnjige[noviId] = novaKnjiga;
-        prikaziTabelu();
-        zatvoriFormu();
-        prikaziPoruku("✅ Нова књига је додата (локално).");
+        // generisanje novog id-a u stilu knj_001, knj_002...
+        let maxBroj = 0;
+        for (let stariId in sveKnjige) {
+            let brojSufiks = stariId.replace("knj_", "").replace("knj", "");
+            let broj = parseInt(brojSufiks);
+            if (!isNaN(broj) && broj > maxBroj) {
+                maxBroj = broj;
+            }
+        }
+        let noviBroj = maxBroj + 1;
+        let noviSufiks = String(noviBroj).padStart(3, "0");
+        let noviId = "knj_" + noviSufiks;
+        urlPutanja = `${firebaseUrl}/knjige/${noviId}.json`;
+    }
+
+    try {
+        const odg = await fetch(urlPutanja, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(novaKnjiga)
+        });
+
+        if (odg.ok) {
+            zatvoriFormu();
+            await ucitajKnjige();
+            prikaziPoruku(
+                trenutniRezim === "izmeni"
+                    ? "✅ Измена је успешно сачувана."
+                    : "✅ Нова књига је додата у базу."
+            );
+        } else {
+            prikaziPoruku("❌ Грешка при упису у базу.");
+        }
+    } catch (greska) {
+        console.error("Грешка при упису књиге:", greska);
+        prikaziPoruku("❌ Грешка при повезивању са базом.");
     }
 }
 
@@ -261,12 +310,25 @@ function zatvoriDijalog() {
     document.getElementById("dijalog-brisanje").style.display = "none";
 }
 
-function potvrdiObrisanje() {
+async function potvrdiObrisanje() {
     if (!idZaBrisanje) return;
-    delete sveKnjige[idZaBrisanje];
-    prikaziTabelu();
-    zatvoriDijalog();
-    prikaziPoruku("✅ Књига је обрисана (локално).");
+
+    try {
+        const odg = await fetch(`${firebaseUrl}/knjige/${idZaBrisanje}.json`, {
+            method: "DELETE"
+        });
+
+        if (odg.ok) {
+            zatvoriDijalog();
+            await ucitajKnjige();
+            prikaziPoruku("✅ Књига је обрисана из базе.");
+        } else {
+            prikaziPoruku("❌ Грешка при брисању из базе.");
+        }
+    } catch (greska) {
+        console.error("Грешка при брисању књиге:", greska);
+        prikaziPoruku("❌ Грешка при повезивању са базом.");
+    }
 }
 
 
@@ -275,3 +337,51 @@ document.addEventListener("DOMContentLoaded", async () => {
     await ucitajAutore();
     await ucitajKnjige();
 }); 
+
+/* 
+function filtrirajAutoreSaViseOd3Primerka() {
+    const telo = document.getElementById("tabela-telo");
+    telo.innerHTML = "";
+
+    const brojacAutora = {};
+    Object.values(sveKnjige).forEach(function(k)
+        {
+            if (k.idAutora) {
+                brojacAutora[k.idAutora] = (brojacAutora[k.idAutora] || 0) + 1;
+            }
+        }
+    );
+
+    const kljucevi = Object.keys(sveKnjige);
+    let pronadjeno = false;
+
+    kljucevi.forEach(function(id) {
+        const k = sveKnjige[id];
+        const brojPrimeraka = brojacAutora[k.idAutora] || 0;
+
+        if (brojPrimeraka > 3) {
+            pronadjeno = true;
+            const autor = sviAutori[k.idAutora]
+                ? `${sviAutori[k.idAutora].ime} ${sviAutori[k.idAutora].prezime}`
+                : k.idAutora || "/";
+            
+            const tr = document.createElement("tr");
+            // OVDE SU SADA KOSI NAVODNICI (taster pored broja 1 na tastaturi)
+            tr.innerHTML = `
+                <td>${k.naziv || "/"}</td>
+                <td>${autor} (${brojPrimeraka})</td>
+                <td>${k.zanr || "/"}</td>
+                <td>${k.cena ? k.cena + " РСД" : "/"}</td>
+                <td>${k.isbn || "/"}</td>
+                <td class="akcije">
+                    <button class="btn-izmeni" onclick="otvoriFormuZaIzmenu('${id}')">Измени</button>
+                    <button class="btn-obrisi" onclick="otvoriBrisanje('${id}')">Обриши</button>
+                </td>`;
+            telo.appendChild(tr);
+        }
+    });
+
+    if (!pronadjeno) {
+        telo.innerHTML = `<tr><td colspan="6" style="text-align:center;">Нема аутора са више од 3 примерка.</td></tr>`;
+    }
+}*/

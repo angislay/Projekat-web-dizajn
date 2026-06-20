@@ -16,7 +16,23 @@ async function preuzmiKnjigeKatalog() {
     }
 }
 
-function prikaziKnjige(knjigeZaPrikaz) {
+function markirajTekst(originalniTekst, trazeniTekst) {
+    if (!trazeniTekst || trazeniTekst.trim() === "") return originalniTekst;
+
+    const tekstZaPretragu = originalniTekst.toLowerCase();
+    const pretragaMala = trazeniTekst.toLowerCase();
+    const pozicija = tekstZaPretragu.indexOf(pretragaMala);
+
+    if (pozicija === -1) return originalniTekst;
+
+    const deoPre = originalniTekst.substring(0, pozicija);
+    const deoPogodak = originalniTekst.substring(pozicija, pozicija + trazeniTekst.length);
+    const deoPosle = originalniTekst.substring(pozicija + trazeniTekst.length);
+
+    return deoPre + "<mark>" + deoPogodak + "</mark>" + deoPosle;
+}
+
+function prikaziKnjige(knjigeZaPrikaz, tekstPretrage = "") {
     let grid = document.getElementById("knjige-grid");
     if (!grid) return;
     grid.innerHTML = ""; 
@@ -41,11 +57,14 @@ function prikaziKnjige(knjigeZaPrikaz) {
         let id = knjiga.id;
         let slikaUrl = (knjiga.slike && knjiga.slike.length > 0) ? knjiga.slike[0] : "https://via.placeholder.com/150x220?text=Nema+Slike";
 
+        let nazivPrikaz = markirajTekst(knjiga.naziv || "", tekstPretrage);
+        let zanrPrikaz = markirajTekst(knjiga.zanr || "/", tekstPretrage);
+
         grid.innerHTML += `
             <div class="knjiga-kartica">
                 <img src="${slikaUrl}" alt="${knjiga.naziv}">
-                <h3>${knjiga.naziv}</h3>
-                <p><strong>Жанр:</strong> ${knjiga.zanr || "/"}</p>
+                <h3>${nazivPrikaz}</h3>
+                <p><strong>Жанр:</strong> ${zanrPrikaz}</p>
                 <p><strong>Цена:</strong> ${knjiga.cena} РСД</p>
                 <a href="knjiga detaljno.html?id=${id}">
                     <button>Детаљи</button>
@@ -73,10 +92,10 @@ function pretraziKnjige() {
                 return nazivKnjige.includes(tekstPretrage);
             } else if (kriterijum === "zanr") {
                 return zanrKnjige.includes(tekstPretrage);
-            } else if (!kriterijum || kriterijum === "cena-rastuce" || kriterijum === "cena-opadajuce") {
+            } else {
+                // podrazumevano: pretraga istovremeno po nazivu I po zanru
                 return nazivKnjige.includes(tekstPretrage) || zanrKnjige.includes(tekstPretrage);
             }
-            return false;
         });
     }
 
@@ -93,7 +112,7 @@ function pretraziKnjige() {
         nizKnjiga.sort((a, b) => Number(b.cena || 0) - Number(a.cena || 0));
     }
 
-    prikaziKnjige(nizKnjiga);
+    prikaziKnjige(nizKnjiga, tekstPretrage);
 }
 
 // Sve event listenere stavljamo ovde unutra da se pokrenu tek kad se HTML skroz ucita

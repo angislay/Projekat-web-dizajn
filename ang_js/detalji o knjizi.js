@@ -30,8 +30,12 @@ async function ucitajPodatkeOKnjizi() {
         const slikaUrl = (knjiga.slike && knjiga.slike.length > 0) ? knjiga.slike[0] : "";
         document.getElementById("knjiga-slika").src = slikaUrl;
 
-        if (knjiga.idAutora) {
+        if (knjiga.idAutora && knjiga.idAutora !== "nepoznat") {
             ucitajAutora(knjiga.idAutora);
+        } else {
+            const autorEl = document.getElementById("knjiga-autor");
+            autorEl.innerText = "Непознат аутор";
+            autorEl.removeAttribute("href");
         }
 
         // Recenzije
@@ -54,7 +58,8 @@ async function ucitajAutora(idAutora) {
             autorEl.innerText = `${autor.ime} ${autor.prezime}`;
             autorEl.href = `autor.html?id=${idAutora}`;
         } else {
-            autorEl.innerText = idAutora;
+            autorEl.innerText = "Непознат аутор";
+            autorEl.removeAttribute("href");
         }
     } catch (e) {
         console.error("Грешка при учитавању аутора:", e);
@@ -116,16 +121,52 @@ function inicijalizujFormuRecenzije() {
 
     if (!dugme) return;
 
-    dugme.addEventListener("click", () => {
+    dugme.addEventListener("click", async () => {
         const tekst = document.getElementById("recenzija-tekst").value.trim();
+        const idKnjige = uzmiIdIzUrl();
+
+        const prijavljeniKorisnikId = localStorage.getItem("prijavljeniKorisnikId");
+
+        if (!prijavljeniKorisnikId) {
+            prikaziPorukulokalno(poruka, "❌ Морате бити пријављени да оставите рецензију.", "greska");
+            if (typeof otvoriLoginModal === "function") {
+                otvoriLoginModal();
+            }
+            return;
+        }
 
         if (tekst === "") {
             prikaziPorukulokalno(poruka, "❌ Поље за рецензију не може бити празно.", "greska");
             return;
         }
 
-        prikaziPorukulokalno(poruka, "✅ Рецензија је валидирана. Упис у базу се ради на финалној одбрани.", "uspeh");
-        document.getElementById("recenzija-tekst").value = "";
+        const novaRecenzija = {
+            tekst: tekst,
+            datum: new Date().toISOString().split("T")[0],
+            idKnjige: idKnjige,
+            idKorisnika: prijavljeniKorisnikId
+        };
+
+        try {
+            const odg = await fetch(`${firebaseUrl}/recenzije.json`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(novaRecenzija)
+            });
+
+            if (odg.ok) {
+                prikaziPorukulokalno(poruka, "✅ Рецензија је успешно сачувана.", "uspeh");
+                document.getElementById("recenzija-tekst").value = "";
+                ucitajRecenzije(idKnjige);
+            } else {
+                prikaziPorukulokalno(poruka, "❌ Грешка при упису рецензије.", "greska");
+            }
+        } catch (greska) {
+            console.error("Грешка при упису рецензије:", greska);
+            prikaziPorukulokalno(poruka, "❌ Грешка при повезивању са базом.", "greska");
+        }
     });
 }
 

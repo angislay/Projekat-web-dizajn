@@ -1,5 +1,3 @@
-
-
 const firebaseUrlLogin = "https://web-projekat-602fa-default-rtdb.firebaseio.com";
 
 function otvoriLoginModal() {
@@ -127,18 +125,129 @@ async function registrujKorisnika() {
     if (!adresa)        { document.getElementById("gr-reg-adresa").textContent = "Обавезно поље"; ok = false; }
     if (!ok) return;
 
-    document.getElementById("uspeh-registracija").textContent = "✅ Регистрација валидирана. Упис у базу се ради на финалној одбрани.";
+    try {
+        // provera da korisnicko ime vec ne postoji u bazi
+        const odgSvi = await fetch(`${firebaseUrlLogin}/korisnici.json`);
+        const sviKorisnici = await odgSvi.json() || {};
+
+        const postoji = Object.values(sviKorisnici).some(
+            k => k.korisnickoIme === korisnickoIme
+        );
+
+        if (postoji) {
+            document.getElementById("gr-reg-korisnicko").textContent = "Ово корисничко име је већ заузето";
+            return;
+        }
+
+        const noviKorisnik = {
+            ime: ime,
+            prezime: prezime,
+            korisnickoIme: korisnickoIme,
+            email: email,
+            lozinka: lozinka,
+            datumRodjenja: datum,
+            adresa: adresa,
+            zanimanje: zanimanje
+        };
+
+        const odg = await fetch(`${firebaseUrlLogin}/korisnici.json`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(noviKorisnik)
+        });
+
+        if (odg.ok) {
+            const odgovorBaze = await odg.json();
+            const noviId = odgovorBaze.name;
+
+            localStorage.setItem("prijavljeniKorisnikId", noviId);
+            localStorage.setItem("prijavljeniKorisnik", JSON.stringify(noviKorisnik));
+
+            document.getElementById("uspeh-registracija").textContent = `✅ Регистрација успешна. Добродошли, ${ime}!`;
+            azurirajDugmePrijave(noviKorisnik);
+
+            setTimeout(() => {
+                zatvoriLoginModal();
+                window.location.href = "profil.html";
+            }, 1200);
+        } else {
+            document.getElementById("gr-reg-opsta").textContent = "❌ Грешка при упису у базу.";
+        }
+    } catch (e) {
+        console.error("Грешка при регистрацији:", e);
+        document.getElementById("gr-reg-opsta").textContent = "❌ Грешка при повезивању са базом.";
+    }
 }
 
 // ========================
 //  dugme prijave i odjave
 // ========================
 
+// Pravi padajuci meni (Profil / Odjavi se) pored dugmeta na koje je vezan
+function napraviKorisnickiMeni(btn, korisnik) {
+    // ako vec postoji meni pored ovog dugmeta, ne pravimo duplikat
+    let meni = btn.parentElement.querySelector(".korisnicki-meni");
+    if (meni) {
+        meni.remove();
+    }
+
+    meni = document.createElement("div");
+    meni.className = "korisnicki-meni";
+    meni.style.display = "none";
+    meni.innerHTML = `
+        <a href="profil.html" class="korisnicki-meni-stavka">👤 Профил</a>
+        <button type="button" class="korisnicki-meni-stavka korisnicki-meni-odjava">🚪 Одјави се</button>
+    `;
+
+    // omotac da dugme i meni budu pozicionirani zajedno
+    if (!btn.parentElement.classList.contains("korisnicki-meni-omotac")) {
+        const omotac = document.createElement("div");
+        omotac.className = "korisnicki-meni-omotac";
+        btn.parentElement.insertBefore(omotac, btn);
+        omotac.appendChild(btn);
+        omotac.appendChild(meni);
+    } else {
+        btn.parentElement.appendChild(meni);
+    }
+
+    meni.querySelector(".korisnicki-meni-odjava").addEventListener("click", (e) => {
+        e.stopPropagation();
+        odjavaKorisnika();
+    });
+
+    return meni;
+}
+
+function ukloniKorisnickiMeni(btn) {
+    const omotac = btn.parentElement;
+    const meni = omotac.querySelector && omotac.querySelector(".korisnicki-meni");
+    if (meni) meni.remove();
+}
+
 function azurirajDugmePrijave(korisnik) {
     document.querySelectorAll(".login-btn").forEach(btn => {
-        if (btn.textContent === "Пријава" || btn.dataset.loginBtn === "true") {
-            btn.textContent = korisnik ? `👤 ${korisnik.ime}` : "Пријава";
+        if (btn.textContent.trim() === "Пријава" || btn.dataset.loginBtn === "true") {
             btn.dataset.loginBtn = "true";
+
+            if (korisnik) {
+                btn.textContent = `👤 ${korisnik.ime}`;
+                btn.onclick = null;
+                btn.removeEventListener("click", otvoriLoginModal);
+
+                const meni = napraviKorisnickiMeni(btn, korisnik);
+
+                // klik na dugme otvara/zatvara meni (umesto login modala)
+                btn.addEventListener("click", function noviKlik(e) {
+                    e.stopPropagation();
+                    meni.style.display = meni.style.display === "none" ? "block" : "none";
+                });
+            } else {
+                btn.textContent = "Пријава";
+                ukloniKorisnickiMeni(btn);
+                btn.addEventListener("click", otvoriLoginModal);
+            }
         }
     });
 }
@@ -146,9 +255,7 @@ function azurirajDugmePrijave(korisnik) {
 function odjavaKorisnika() {
     localStorage.removeItem("prijavljeniKorisnikId");
     localStorage.removeItem("prijavljeniKorisnik");
-    document.querySelectorAll(".login-btn[data-login-btn='true']").forEach(btn => {
-        btn.textContent = "Пријава";
-    });
+    window.location.href = "katalog knjiga.html";
 }
 
 
@@ -158,15 +265,25 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.target === this) zatvoriLoginModal();
     });
 
-    document.querySelectorAll(".login-btn").forEach(btn => {
-        if (btn.textContent.trim() === "Пријава") {
-            btn.dataset.loginBtn = "true";
-            btn.addEventListener("click", otvoriLoginModal);
-        }
+    // zatvara padajuci korisnicki meni kad se klikne bilo gde drugo na stranici
+    document.addEventListener("click", () => {
+        document.querySelectorAll(".korisnicki-meni").forEach(meni => {
+            meni.style.display = "none";
+        });
     });
 
     const sacuvan = localStorage.getItem("prijavljeniKorisnik");
     if (sacuvan) {
+        // korisnik je prijavljen — azurirajDugmePrijave ce sama postaviti
+        // ispravan klik listener (otvaranje padajuceg menija)
         azurirajDugmePrijave(JSON.parse(sacuvan));
+    } else {
+        // niko nije prijavljen — dugme otvara login modal
+        document.querySelectorAll(".login-btn").forEach(btn => {
+            if (btn.textContent.trim() === "Пријава") {
+                btn.dataset.loginBtn = "true";
+                btn.addEventListener("click", otvoriLoginModal);
+            }
+        });
     }
 });

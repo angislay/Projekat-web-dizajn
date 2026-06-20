@@ -175,6 +175,13 @@ body{
     padding: 40px;
 }
 
+mark {
+    background-color: #9d4edd;
+    color: white;
+    border-radius: 3px;
+    padding: 0 2px;
+}
+
 .hamburger_dugme {
     display: none;
     background: transparent;
