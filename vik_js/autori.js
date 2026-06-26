@@ -9,7 +9,6 @@ function listaj_autore(niz, pojam = "") {
     const container = document.getElementById("ispis");
     container.innerHTML = "";
     
-    // Чистимо појам од размака и пребацујемо у мала слова ради лакше претраге
     let trazeniTekst = pojam.trim().toLowerCase();
 
     for (let id in niz) {
@@ -17,21 +16,14 @@ function listaj_autore(niz, pojam = "") {
         let originalnoIme = `${autor.ime} ${autor.prezime}`;
         let prikazImena = originalnoIme;
 
-        // Ако корисник куца нешто у претрагу, правимо маркирање
         if (trazeniTekst !== "") {
             let tekstZaPretragu = originalnoIme.toLowerCase();
             let pozicija = tekstZaPretragu.indexOf(trazeniTekst);
 
-            // Ако је текст пронађен унутар имена и презимена
             if (pozicija !== -1) {
-                // Сечемо део ПРЕ поготка
                 let deoPre = originalnoIme.substring(0, pozicija);
-                // Сечемо ТАЧАН погодак (задржавамо оригинална велика и мала слова из базе)
                 let deoPogodak = originalnoIme.substring(pozicija, pozicija + trazeniTekst.length);
-                // Сечемо део ПОСЛЕ поготка
                 let deoPosle = originalnoIme.substring(pozicija + trazeniTekst.length);
-
-                // Спајамо све назад и умотавамо погођени део у <mark> таг
                 prikazImena = deoPre + "<mark>" + deoPogodak + "</mark>" + deoPosle;
             }
         }
@@ -39,16 +31,17 @@ function listaj_autore(niz, pojam = "") {
         container.innerHTML += `
             <div class="ocjena">
                 <a href="autor.html?id=${id}"><strong>${prikazImena}</strong></a>
-                <div class="zvijezde">
+                
+                </div>
+            </div>`;
+    }
+    /* <div class="zvijezde">
                     <label for="">Просјечна оцјена корисника: </label>
                     <span class="fa fa-star popunjena_zvijezda"></span> 
                     <span class="fa fa-star popunjena_zvijezda"></span> 
                     <span class="fa fa-star popunjena_zvijezda"></span> 
                     <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-            </div>`;
-    }
+                    <span class="fa fa-star"></span> */
 }
 function pretrazi(){
     pronadjeni_autori={};

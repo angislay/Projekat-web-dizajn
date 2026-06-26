@@ -236,7 +236,6 @@ function zatvori_prozor_brisanje() {
 document.getElementById("potvrdi_brisanje_dugme").addEventListener("click", async function() {
     if (trenutni_autor_id) {
         try {
-            // 1. ЧИШЋЕЊЕ КЊИГА (Идемо једну по једну и чекамо одговор)
             const odgKnjige = await fetch(`${firebaseUrl}/knjige.json`);
             const knjige = await odgKnjige.json() || {};
 
@@ -246,7 +245,6 @@ document.getElementById("potvrdi_brisanje_dugme").addEventListener("click", asyn
                 if (knjiga.idAutora === trenutni_autor_id) {
                     console.log(`Чистим референцу аутора у књизи: ${knjiga_id}`);
                     
-                    // Овде користимо await, што значи да се чека Firebase пре следећег круга петље
                     await fetch(`${firebaseUrl}/knjige/${knjiga_id}.json`, {
                         method: "PATCH",
                         headers: {
@@ -257,7 +255,6 @@ document.getElementById("potvrdi_brisanje_dugme").addEventListener("click", asyn
                 }
             }
 
-            // 2. БРИСАЊЕ ОЦЕНА (Идемо једну по једну и чекамо одговор)
             const odgOcene = await fetch(`${firebaseUrl}/ocene.json`);
             const ocene = await odgOcene.json() || {};
 
@@ -267,14 +264,12 @@ document.getElementById("potvrdi_brisanje_dugme").addEventListener("click", asyn
                 if (ocena.idAutora === trenutni_autor_id) {
                     console.log(`Бришем оцену за аутора: ${ocena_id}`);
                     
-                    // Поново користимо await за брисање ове конкретне оцене
                     await fetch(`${firebaseUrl}/ocene/${ocena_id}.json`, {
                         method: "DELETE"
                     });
                 }
             }
 
-            // 3. БРИСАЊЕ САМОГ АУТОРА НА КРАЈУ (Тек када је све горе завршено)
             const odg = await fetch(`${firebaseUrl}/autori/${trenutni_autor_id}.json`, {
                 method: "DELETE"
             });
