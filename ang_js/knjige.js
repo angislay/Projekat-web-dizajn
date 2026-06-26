@@ -93,7 +93,6 @@ function pretraziKnjige() {
             } else if (kriterijum === "zanr") {
                 return zanrKnjige.includes(tekstPretrage);
             } else {
-                // podrazumevano: pretraga istovremeno po nazivu I po zanru
                 return nazivKnjige.includes(tekstPretrage) || zanrKnjige.includes(tekstPretrage);
             }
         });
@@ -115,7 +114,6 @@ function pretraziKnjige() {
     prikaziKnjige(nizKnjiga, tekstPretrage);
 }
 
-// Sve event listenere stavljamo ovde unutra da se pokrenu tek kad se HTML skroz ucita
 document.addEventListener("DOMContentLoaded", () => {
     preuzmiKnjigeKatalog();
 

@@ -1,6 +1,5 @@
 const firebaseUrl = "https://web-projekat-602fa-default-rtdb.firebaseio.com";
 
-// Čita id knjige iz URL-a (?id=knj005)
 function uzmiIdIzUrl() {
     return new URLSearchParams(window.location.search).get("id");
 }
@@ -38,7 +37,6 @@ async function ucitajPodatkeOKnjizi() {
             autorEl.removeAttribute("href");
         }
 
-        // Recenzije
         ucitajRecenzije(idKnjige);
 
     } catch (greska) {
@@ -85,15 +83,23 @@ async function ucitajRecenzije(idKnjige) {
             return;
         }
 
+        const odgKorisnici = await fetch(`${firebaseUrl}/korisnici.json`);
+        const sviKorisnici = await odgKorisnici.json() || {};
+
         recenzijeKnjige.sort((a, b) => new Date(b.datum) - new Date(a.datum));
 
         kontejner.innerHTML = "";
         recenzijeKnjige.forEach(r => {
+            const korisnik = sviKorisnici[r.idKorisnika];
+            const imeZaPrikaz = korisnik
+                ? (korisnik.korisnickoIme || `${korisnik.ime} ${korisnik.prezime}`)
+                : "Анониман";
+
             const div = document.createElement("div");
             div.classList.add("komentar-kartica");
             div.innerHTML = `
                 <div class="komentar-meta">
-                    <span class="komentar-korisnik">👤 ${r.idKorisnika || "Анониман"}</span>
+                    <span class="komentar-korisnik">👤 ${imeZaPrikaz}</span>
                     <span class="komentar-datum">${formatDatum(r.datum)}</span>
                 </div>
                 <p class="komentar-tekst">${r.tekst || ""}</p>

@@ -241,7 +241,6 @@ async function sacuvajKnjigu() {
     let urlPutanja = "";
 
     if (trenutniRezim === "izmeni" && trenutniIdKnjige) {
-        // izmena postojece knjige - PUT na tacnu putanju
         urlPutanja = `${firebaseUrl}/knjige/${trenutniIdKnjige}.json`;
     } else {
         // generisanje novog id-a u stilu knj_001, knj_002...
@@ -338,50 +337,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     await ucitajKnjige();
 }); 
 
-/* 
-function filtrirajAutoreSaViseOd3Primerka() {
-    const telo = document.getElementById("tabela-telo");
-    telo.innerHTML = "";
-
-    const brojacAutora = {};
-    Object.values(sveKnjige).forEach(function(k)
-        {
-            if (k.idAutora) {
-                brojacAutora[k.idAutora] = (brojacAutora[k.idAutora] || 0) + 1;
-            }
-        }
-    );
-
-    const kljucevi = Object.keys(sveKnjige);
-    let pronadjeno = false;
-
-    kljucevi.forEach(function(id) {
-        const k = sveKnjige[id];
-        const brojPrimeraka = brojacAutora[k.idAutora] || 0;
-
-        if (brojPrimeraka > 3) {
-            pronadjeno = true;
-            const autor = sviAutori[k.idAutora]
-                ? `${sviAutori[k.idAutora].ime} ${sviAutori[k.idAutora].prezime}`
-                : k.idAutora || "/";
-            
-            const tr = document.createElement("tr");
-            // OVDE SU SADA KOSI NAVODNICI (taster pored broja 1 na tastaturi)
-            tr.innerHTML = `
-                <td>${k.naziv || "/"}</td>
-                <td>${autor} (${brojPrimeraka})</td>
-                <td>${k.zanr || "/"}</td>
-                <td>${k.cena ? k.cena + " РСД" : "/"}</td>
-                <td>${k.isbn || "/"}</td>
-                <td class="akcije">
-                    <button class="btn-izmeni" onclick="otvoriFormuZaIzmenu('${id}')">Измени</button>
-                    <button class="btn-obrisi" onclick="otvoriBrisanje('${id}')">Обриши</button>
-                </td>`;
-            telo.appendChild(tr);
-        }
-    });
-
-    if (!pronadjeno) {
-        telo.innerHTML = `<tr><td colspan="6" style="text-align:center;">Нема аутора са више од 3 примерка.</td></tr>`;
-    }
-}*/
